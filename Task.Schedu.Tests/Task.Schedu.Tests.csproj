@@ -113,7 +113,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Task.Schedu.ConfigHandler\Task.Schedu.ConfigHandler.csproj">
+    <ProjectReference Include="..\Task.Schedu.Handle\Task.Schedu.ConfigHandler\Task.Schedu.ConfigHandler.csproj">
       <Project>{f5c9ade9-044c-4983-8dcb-f34148be9751}</Project>
       <Name>Task.Schedu.ConfigHandler</Name>
     </ProjectReference>
@@ -125,7 +125,7 @@
       <Project>{ea03610e-2aec-4ad3-bb8b-1118a4c119aa}</Project>
       <Name>Task.Schedu.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Task.Schedu.Quarzt\Task.Schedu.Quarzt.csproj">
+    <ProjectReference Include="..\Task.Schedu.Handle\Task.Schedu.Quarzt\Task.Schedu.Quarzt.csproj">
       <Project>{73b24c2e-25a2-45ef-a407-2e3f52f26c26}</Project>
       <Name>Task.Schedu.Quarzt</Name>
     </ProjectReference>

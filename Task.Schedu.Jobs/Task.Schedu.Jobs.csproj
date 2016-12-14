@@ -76,7 +76,7 @@
     <Compile Include="Utils\TaskLog.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Task.Schdeu.Message\Task.Schdeu.Message.csproj">
+    <ProjectReference Include="..\Task.Schedu.Handle\Task.Schdeu.Message\Task.Schdeu.Message.csproj">
       <Project>{722fe141-dd38-4efd-8640-67aaa0e4c8b6}</Project>
       <Name>Task.Schdeu.Message</Name>
     </ProjectReference>

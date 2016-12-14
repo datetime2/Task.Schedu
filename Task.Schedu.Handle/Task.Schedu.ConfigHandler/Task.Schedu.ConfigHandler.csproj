@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{73B24C2E-25A2-45EF-A407-2E3F52F26C26}</ProjectGuid>
+    <ProjectGuid>{F5C9ADE9-044C-4983-8DCB-F34148BE9751}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Task.Schedu.Quarzt</RootNamespace>
-    <AssemblyName>Task.Schedu.Quarzt</AssemblyName>
+    <RootNamespace>Task.Schedu.ConfigHandler</RootNamespace>
+    <AssemblyName>Task.Schedu.ConfigHandler</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,19 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Quartz, Version=2.4.1.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Quartz.2.4.1\lib\net40\Quartz.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,27 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomTriggerListener.cs" />
+    <Compile Include="ConfigManager.cs" />
+    <Compile Include="IConfigService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuartzHelper.cs" />
-    <Compile Include="TaskUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="job_scheduling_data_2_0.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Task.Schedu.Data\Task.Schedu.Data.csproj">
+    <ProjectReference Include="..\..\Task.Schedu.Data\Task.Schedu.Data.csproj">
       <Project>{4bd8294e-9df8-4e54-a6da-93f7cd609f45}</Project>
       <Name>Task.Schedu.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Task.Schedu.Model\Task.Schedu.Model.csproj">
+    <ProjectReference Include="..\..\Task.Schedu.Model\Task.Schedu.Model.csproj">
       <Project>{ea03610e-2aec-4ad3-bb8b-1118a4c119aa}</Project>
       <Name>Task.Schedu.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Task.Schedu.Utility\Task.Schedu.Utility.csproj">
+    <ProjectReference Include="..\..\Task.Schedu.Utility\Task.Schedu.Utility.csproj">
       <Project>{d2aaedff-9f30-49a6-b242-f655503c24f3}</Project>
       <Name>Task.Schedu.Utility</Name>
     </ProjectReference>
