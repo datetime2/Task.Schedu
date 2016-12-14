@@ -1,5 +1,5 @@
 ﻿using Nancy;
-using Task.Schedu.Utility.ConfigHandler;
+using Task.Schedu.Model;
 
 namespace Task.Schedu.Web.Modules
 {

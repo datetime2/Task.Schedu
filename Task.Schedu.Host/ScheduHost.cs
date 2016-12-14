@@ -3,8 +3,11 @@ using Owin_Nancy;
 using System.Diagnostics;
 using System.ServiceProcess;
 using System.Threading;
-using Task.Schedu.Utility.ConfigHandler;
 using Task.Schedu.Utility.Mef;
+using Task.Schedu.ConfigHandler;
+using Task.Schedu.Quarzt;
+using Task.Schedu.Utility.Reflection;
+using Task.Schedu.Model;
 
 namespace Task.Schedu.Host
 {

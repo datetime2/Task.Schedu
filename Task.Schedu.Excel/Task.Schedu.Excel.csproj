@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4BD8294E-9DF8-4E54-A6DA-93F7CD609F45}</ProjectGuid>
+    <ProjectGuid>{9971FC17-99C2-4691-B5E2-8EEA0BAADEB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Task.Schedu.Data</RootNamespace>
-    <AssemblyName>Task.Schedu.Data</AssemblyName>
+    <RootNamespace>Task.Schedu.Excel</RootNamespace>
+    <AssemblyName>Task.Schedu.Excel</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,20 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=1.50.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.1.50.0\lib\net40\Dapper.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HttpHelper">
+      <HintPath>..\packages\Task.Schedu.1.0.0\HttpHelper.dll</HintPath>
     </Reference>
-    <Reference Include="DapperExtensions, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DapperExtensions.1.5.0\lib\net40\DapperExtensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.6.9.9\lib\net40\MySql.Data.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\NPOI.1.2.5\lib\net40\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\packages\NPOI.1.2.5\lib\net40\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,14 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbHelper.cs" />
-    <Compile Include="Pagination.cs" />
-    <Compile Include="SQLHelper.cs" />
+    <Compile Include="ColumnInfo.cs" />
+    <Compile Include="ExcelImporMapper.cs" />
+    <Compile Include="ExcelImport.cs" />
+    <Compile Include="ExcelInfo.cs" />
+    <Compile Include="ExcelUtil.cs" />
+    <Compile Include="NpoiHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Task.Schedu.Model\Task.Schedu.Model.csproj">

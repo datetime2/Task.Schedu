@@ -3,6 +3,9 @@ using Task.Schedu.Utility;
 using Quartz;
 using System;
 using System.Collections.Generic;
+using Task.Schedu.Data;
+using Task.Schdeu.Message;
+using Task.Schedu.Model;
 
 namespace Task.Schedu.Jobs
 {
@@ -21,7 +24,7 @@ namespace Task.Schedu.Jobs
                 TaskLog.SendMessageLogInfo.WriteLogE("\r\n\r\n\r\n\r\n------------------发送信息任务开始执行 " + start.ToString("yyyy-MM-dd HH:mm:ss") + " BEGIN-----------------------------\r\n\r\n");
 
                 //取出所有当前待发送的消息
-                List<Message> listWait = SQLHelper.ToList<Message>(strSQL2);
+                List<Messages> listWait = SQLHelper.ToList<Messages>(strSQL2);
                 bool isSucess = false;
                 if (listWait == null || listWait.Count == 0)
                 {

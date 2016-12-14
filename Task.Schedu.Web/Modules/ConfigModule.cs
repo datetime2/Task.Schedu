@@ -1,6 +1,7 @@
 ﻿using Nancy;
 using Nancy.ModelBinding;
-using Task.Schedu.Utility.ConfigHandler;
+using Task.Schedu.ConfigHandler;
+using Task.Schedu.Model;
 using Task.Schedu.Utility.Mef;
 
 namespace Task.Schedu.Web.Modules

@@ -51,10 +51,6 @@
       <HintPath>..\packages\log4net.2.0.5\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.6.9.9\lib\net40\MySql.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -86,47 +82,22 @@
   <ItemGroup>
     <Compile Include="Admin\AdminRun.cs" />
     <Compile Include="Auth\UserInfo.cs" />
-    <Compile Include="ConfigHandler\ConfigAttribute.cs" />
-    <Compile Include="ConfigHandler\ConfigDescription.cs" />
-    <Compile Include="ConfigHandler\ConfigManager.cs" />
-    <Compile Include="ConfigHandler\ConfigOption.cs" />
-    <Compile Include="ConfigHandler\ConfigTypeAttribute.cs" />
-    <Compile Include="ConfigHandler\Config\EmailConfig.cs" />
-    <Compile Include="ConfigHandler\Config\SystemConfig.cs" />
-    <Compile Include="ConfigHandler\IConfigService.cs" />
-    <Compile Include="ConfigHandler\Options.cs" />
     <Compile Include="Config\ConfigInit.cs" />
     <Compile Include="Config\SysConfig.cs" />
-    <Compile Include="DB\DbHelper.cs" />
-    <Compile Include="DB\Reflection\DynamicMethodEmit.cs" />
-    <Compile Include="DB\Reflection\MethodWrapper.cs" />
-    <Compile Include="DB\Reflection\PropertyWrapper.cs" />
-    <Compile Include="DB\Reflection\ReflectionExtensions.cs" />
-    <Compile Include="DB\SQLHelper.cs" />
     <Compile Include="Encrypt\DESEncrypt.cs" />
     <Compile Include="Enum\EnumHelper.cs" />
-    <Compile Include="Excel\ColumnInfo.cs" />
-    <Compile Include="Excel\ExcelImporMapper.cs" />
-    <Compile Include="Excel\ExcelImport.cs" />
-    <Compile Include="Excel\ExcelInfo.cs" />
-    <Compile Include="Excel\ExcelUtil.cs" />
-    <Compile Include="Excel\NpoiHelper.cs" />
     <Compile Include="File\FileHelper.cs" />
     <Compile Include="Filter\JsonBaseModel.cs" />
-    <Compile Include="Filter\Pagination.cs" />
-    <Compile Include="Filter\QueryCondition.cs" />
     <Compile Include="Http\MimeHelper.cs" />
     <Compile Include="Log\LogHelper.cs" />
     <Compile Include="Mef\MefConfig.cs" />
     <Compile Include="NVelocity\FileGen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quartz\CustomTriggerListener.cs" />
-    <Compile Include="Quartz\QuartzHelper.cs" />
-    <Compile Include="Quartz\TaskUtil.cs" />
+    <Compile Include="Reflection\DynamicMethodEmit.cs" />
+    <Compile Include="Reflection\MethodWrapper.cs" />
+    <Compile Include="Reflection\PropertyWrapper.cs" />
+    <Compile Include="Reflection\ReflectionExtensions.cs" />
     <Compile Include="Regex\RegexHelper.cs" />
-    <Compile Include="SMS\SmsHelper.cs" />
-    <Compile Include="SMS\MessageHelper.cs" />
-    <Compile Include="SMS\MailHelper.cs" />
     <Compile Include="StaticExtend\DataTableListHelper.cs" />
     <Compile Include="StaticExtend\StringExt.cs" />
     <Compile Include="Time\TimeHelper.cs" />
@@ -140,6 +111,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

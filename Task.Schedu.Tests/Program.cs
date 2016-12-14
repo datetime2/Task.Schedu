@@ -9,7 +9,10 @@ using System.Diagnostics;
 using System.Net;
 using System.Text;
 using Task.Schedu.Utility.Mef;
-using Task.Schedu.Utility.ConfigHandler;
+using Task.Schedu.ConfigHandler;
+using Task.Schedu.Quarzt;
+using Task.Schedu.Model;
+using Task.Schedu.Data;
 
 namespace Task.Schedu.Tests
 {

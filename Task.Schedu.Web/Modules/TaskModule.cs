@@ -2,6 +2,8 @@
 using Nancy;
 using Nancy.ModelBinding;
 using System;
+using Task.Schedu.Quarzt;
+using Task.Schedu.Model;
 
 namespace Task.Schedu.Web.Modules
 {

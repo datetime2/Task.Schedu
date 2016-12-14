@@ -1,8 +1,9 @@
 ﻿using Nancy.Hosting.Self;
 using System;
 using System.Net;
+using Task.Schedu.ConfigHandler;
+using Task.Schedu.Model;
 using Task.Schedu.Utility;
-using Task.Schedu.Utility.ConfigHandler;
 
 namespace Owin_Nancy
 {
