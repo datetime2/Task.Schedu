@@ -18,7 +18,7 @@ namespace Task.Schedu.Utility
         /// <param name="Type">消息类型</param>
         /// <param name="FromType">消息来源类型</param>
         /// <param name="FkGUID">消息来源GUID</param>
-        public static int AddMessage(string Receiver, string Content, string Subject,string FromType,Guid FkGUID, MessageType Type = MessageType.SMS)
+        public static int AddMessage(string Receiver, string Content, string Subject,string FromType,string FkGUID, MessageType Type = MessageType.SMS)
         {
             if (string.IsNullOrEmpty("Receiver") || string.IsNullOrEmpty("Content"))
             {
@@ -29,7 +29,7 @@ namespace Task.Schedu.Utility
             StringBuilder sb = new StringBuilder();
             foreach (var item in Receivers)
             {
-                sb.AppendFormat(@"INSERT INTO dbo.p_Message(Receiver,Content,Subject,Type,FromType,FkGUID) SELECT '{0}',@Content,@Subject,@Type,@FromType,@FkGUID;", item);
+                sb.AppendFormat(@"INSERT INTO t_Message(Receiver,Content,Subject,Type,FromType,FkGUID) SELECT '{0}',@Content,@Subject,@Type,@FromType,@FkGUID;", item);
             }
             return SQLHelper.ExecuteNonQuery(sb.ToString(), new { Content = Content, Subject = Subject, FromType = FromType, FkGUID = FkGUID,Type = EnumHelper.EnumToInt<MessageType>(Type) });
         }
@@ -39,7 +39,7 @@ namespace Task.Schedu.Utility
         /// </summary>
         /// <param name="MessageGuid">消息GUID</param>
         /// <returns>状态</returns>
-        public static bool SendMessage(Guid MessageGuid)
+        public static bool SendMessage(string MessageGuid)
         {
             Message message = GetMessageById(MessageGuid);
             return SendMessage(message);
@@ -84,12 +84,12 @@ namespace Task.Schedu.Utility
         /// </summary>
         /// <param name="MessageGuid">消息GUID</param>
         /// <param name="isSuccess">是否发送成功</param>
-        public static void RemoveMessage(Guid MessageGuid, string remark)
+        public static void RemoveMessage(string MessageGuid, string remark)
         {
             int Staue = string.IsNullOrEmpty(remark) ? 0 : 1;
-            string strSQL = @"INSERT INTO dbo.p_MessageHistory(MessageGuid,Receiver,Type,Content,Subject,FromType,FkGUID,CreatedOn,Staue,Remark)
-            SELECT  MessageGuid,Receiver,Type,Content,Subject,FromType,FkGUID,CreatedOn,@Staue,@Remark FROM dbo.p_Message WHERE MessageGuid=@MessageGuid;
-            DELETE FROM dbo.p_Message WHERE MessageGuid=@MessageGuid;";
+            string strSQL = @"INSERT INTO t_MessageHistory(MessageGuid,Receiver,Type,Content,Subject,FromType,FkGUID,CreatedOn,Staue,Remark)
+            SELECT  MessageGuid,Receiver,Type,Content,Subject,FromType,FkGUID,CreatedOn,@Staue,@Remark FROM t_Message WHERE MessageGuid=@MessageGuid;
+            DELETE FROM t_Message WHERE MessageGuid=@MessageGuid;";
             SQLHelper.ExecuteNonQuery(strSQL, new { MessageGuid = MessageGuid, Staue = Staue, Remark = remark });
         }
 
@@ -98,9 +98,9 @@ namespace Task.Schedu.Utility
         /// </summary>
         /// <param name="MessageGuid">消息GUID</param>
         /// <returns>消息</returns>
-        public static Message GetMessageById(Guid MessageGuid)
+        public static Message GetMessageById(string MessageGuid)
         {
-            return SQLHelper.Single<Message>("SELECT * FROM dbo.p_Message WHERE MessageGuid=@MessageGuid", new { MessageGuid = MessageGuid });
+            return SQLHelper.Single<Message>("SELECT * FROM t_Message WHERE MessageGuid=@MessageGuid", new { MessageGuid = MessageGuid });
         }
     }
 
@@ -112,7 +112,7 @@ namespace Task.Schedu.Utility
         /// <summary>
         /// 消息GUID
         /// </summary>
-        public Guid MessageGuid { get; set; }
+        public string MessageGuid { get; set; }
 
         /// <summary>
         /// 消息接收人

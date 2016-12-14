@@ -54,13 +54,13 @@ namespace Task.Schedu.Jobs
         //        SELECT MessageGuid,Receiver,Content,Subject,Type,CreatedOn FROM (       
 	       //         SELECT *,ROW_NUMBER() OVER ( PARTITION BY Receiver ORDER BY Interval DESC ) AS RowNum FROM 
 	       //         (
-		      //          SELECT A.*,DATEDIFF(MINUTE,ISNULL(B.SendOn,'1900-01-01'),A.CreatedOn) AS Interval FROM dbo.p_Message AS A
+		      //          SELECT A.*,DATEDIFF(MINUTE,ISNULL(B.SendOn,'1900-01-01'),A.CreatedOn) AS Interval FROM t_Message AS A
 		      //          LEFT JOIN 
 		      //          (       
 			     //           SELECT  
 				    //            Receiver ,SendOn,
 				    //            ROW_NUMBER() OVER ( PARTITION BY Receiver ORDER BY SendOn DESC ) AS Num
-			     //           FROM    dbo.p_MessageHistory 
+			     //           FROM    t_MessageHistory 
 		      //          )AS B
 		      //          ON A.Receiver = B.Receiver AND B.Num=1
 	       //         )AS C
@@ -74,14 +74,14 @@ namespace Task.Schedu.Jobs
         //    SELECT MessageGuid,Receiver,Content,Subject,Type,CreatedOn FROM (
 	       //     SELECT  * ,
 			     //       ROW_NUMBER() OVER ( PARTITION BY Receiver ORDER BY CreatedOn DESC ) AS RowNum
-	       //     FROM    dbo.p_Message
+	       //     FROM    t_Message
 	       //     WHERE   DATEDIFF(MINUTE, CreatedOn, GETDATE()) > 3
         //    )AS A
         //    WHERE A.RowNum=1";
 
         /// <summary>
-        /// 取出p_Message表里面所有数据进行发送
+        /// 取出t_Message表里面所有数据进行发送
         /// </summary>
-        private static readonly string strSQL2 = @"SELECT MessageGuid,Receiver,Content,Subject,Type,CreatedOn FROM dbo.p_Message ";
+        private static readonly string strSQL2 = @"SELECT MessageGuid,Receiver,Content,Subject,Type,CreatedOn FROM t_Message ";
     }
 }

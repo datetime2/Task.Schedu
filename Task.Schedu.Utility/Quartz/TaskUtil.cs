@@ -100,10 +100,10 @@ namespace Task.Schedu.Utility
     /// </summary>
     public class TaskHelper
     {
-        private static string InsertSQL = @"INSERT INTO p_Task(TaskID,TaskName,CronExpressionString,Assembly,Class,Status,CronRemark,Remark,LastRunTime)
+        private static string InsertSQL = @"INSERT INTO t_Task(TaskID,TaskName,CronExpressionString,Assembly,Class,Status,CronRemark,Remark,LastRunTime)
                             VALUES(@TaskID,@TaskName,@CronExpressionString,@Assembly,@Class,@Status,@CronRemark,@Remark,@LastRunTime)";
 
-        private static string UpdateSQL = @"UPDATE p_Task SET TaskName=@TaskName,CronExpressionString=@CronExpressionString,Assembly=@Assembly,
+        private static string UpdateSQL = @"UPDATE t_Task SET TaskName=@TaskName,CronExpressionString=@CronExpressionString,Assembly=@Assembly,
                                 Class=@Class,CronRemark=@CronRemark,Remark=@Remark,LastRunTime=@LastRunTime WHERE TaskID=@TaskID";
         /// <summary>
         /// 获取指定id任务数据
@@ -112,7 +112,7 @@ namespace Task.Schedu.Utility
         /// <returns>任务数据</returns>
         public static TaskUtil GetById(string TaskID)
         {
-            return SQLHelper.Single<TaskUtil>("SELECT * FROM p_Task WHERE TaskID=@TaskID", new { TaskID = TaskID });
+            return SQLHelper.Single<TaskUtil>("SELECT * FROM t_Task WHERE TaskID=@TaskID", new { TaskID = TaskID });
         }
 
         public static void RunById(string TaskID)
@@ -127,7 +127,7 @@ namespace Task.Schedu.Utility
         public static void DeleteById(string TaskID)
         {
             QuartzHelper.DeleteJob(TaskID);
-            SQLHelper.ExecuteNonQuery("DELETE FROM p_Task WHERE TaskID=@TaskID", new { TaskID = TaskID });
+            SQLHelper.ExecuteNonQuery("DELETE FROM t_Task WHERE TaskID=@TaskID", new { TaskID = TaskID });
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Task.Schedu.Utility
             {
                 QuartzHelper.PauseJob(TaskID);
             }
-            SQLHelper.ExecuteNonQuery("UPDATE p_Task SET Status=@Status WHERE TaskID=@TaskID", new { TaskID = TaskID, Status = Status });
+            SQLHelper.ExecuteNonQuery("UPDATE t_Task SET Status=@Status WHERE TaskID=@TaskID", new { TaskID = TaskID, Status = Status });
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Task.Schedu.Utility
         /// <param name="LastRunTime">下次运行时间</param>
         public static void UpdateLastRunTime(string TaskID, DateTime LastRunTime)
         {
-            SQLHelper.ExecuteNonQuery("UPDATE p_Task SET LastRunTime=@LastRunTime WHERE TaskID=@TaskID", new { TaskID = TaskID, LastRunTime = LastRunTime });
+            SQLHelper.ExecuteNonQuery("UPDATE t_Task SET LastRunTime=@LastRunTime WHERE TaskID=@TaskID", new { TaskID = TaskID, LastRunTime = LastRunTime });
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Task.Schedu.Utility
         /// <param name="TaskID">任务id</param>
         public static void UpdateRecentRunTime(string TaskID, DateTime LastRunTime)
         {
-            SQLHelper.ExecuteNonQuery("UPDATE p_Task SET RecentRunTime=@RecentRunTime,LastRunTime=@LastRunTime WHERE TaskID=@TaskID", new { TaskID = TaskID, LastRunTime = LastRunTime, RecentRunTime = DateTime.Now });
+            SQLHelper.ExecuteNonQuery("UPDATE t_Task SET RecentRunTime=@RecentRunTime,LastRunTime=@LastRunTime WHERE TaskID=@TaskID", new { TaskID = TaskID, LastRunTime = LastRunTime, RecentRunTime = DateTime.Now });
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Task.Schedu.Utility
         /// <returns>所有启用的任务</returns>
         public static List<TaskUtil> ReadConfig()
         {
-            return SQLHelper.ToList<TaskUtil>("SELECT * FROM p_Task where Status=0");
+            return SQLHelper.ToList<TaskUtil>("SELECT * FROM t_Task where Status=0");
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Task.Schedu.Utility
                 condition.SortField = "CreatedOn";
                 condition.SortOrder = "DESC";
             }
-            Hashtable ht = Pagination.QueryBase<TaskUtil>("SELECT * FROM p_Task", condition);
+            Hashtable ht = Pagination.QueryBase<TaskUtil>("SELECT * FROM t_Task", condition);
             result.Result = ht["data"] as List<TaskUtil>;
             result.TotalCount = Convert.ToInt32(ht["total"]);
             result.TotalPage = result.CalculateTotalPage(condition.PageSize, result.TotalCount.Value, condition.IsPagination);

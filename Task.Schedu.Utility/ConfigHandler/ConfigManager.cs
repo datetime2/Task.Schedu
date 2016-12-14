@@ -191,7 +191,7 @@ namespace Task.Schedu.Utility.ConfigHandler
         /// <param name="value">更新的值</param>
         public static void UpdateValueByKey(string GroupType, string key, string value)
         {
-            SQLHelper.ExecuteNonQuery("UPDATE Configuration_Options set `Value`=@NewValue WHERE OptionType=@OptionType and Key=@OptionKey",
+            SQLHelper.ExecuteNonQuery("UPDATE t_Configuration set `Value`=@NewValue WHERE OptionType=@OptionType and Key=@OptionKey",
                 new { OptionType = GroupType, OptionKey = key, NewValue = value });
         }
 
@@ -228,12 +228,12 @@ namespace Task.Schedu.Utility.ConfigHandler
             try
             {
                 //删除原有数据
-                SQLHelper.ExecuteNonQuery("Delete from Configuration_Options WHERE OptionType=@OptionType", new { OptionType = GroupType });
+                SQLHelper.ExecuteNonQuery("Delete from t_Configuration WHERE OptionType=@OptionType", new { OptionType = GroupType });
                 //保存数据
                 foreach (var item in value.ListOptions)
                 {
                     item.OptionId = Guid.NewGuid().ToString("N");
-                    SQLHelper.ExecuteNonQuery(@"INSERT INTO Configuration_Options(OptionId,OptionType,OptionName,`Key`,`Value`,ValueType) 
+                    SQLHelper.ExecuteNonQuery(@"INSERT INTO t_Configuration(OptionId,OptionType,OptionName,`Key`,`Value`,ValueType) 
                     select @OptionId,@OptionType,@OptionName,@Key,@Value,@ValueType", item);
                 }
             }

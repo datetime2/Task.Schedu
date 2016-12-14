@@ -31,7 +31,7 @@ namespace Task.Schedu.Utility.ConfigHandler
         /// <returns>所有配置项</returns>
         public List<Options> GetAllOptions(string GroupType = "")
         {
-            string strSQL = "select * from Configuration_Options";
+            string strSQL = "select * from t_Configuration";
             if (!string.IsNullOrEmpty(GroupType))
             {
                 strSQL += string.Format(" where OPTIONTYPE='{0}'", GroupType);
