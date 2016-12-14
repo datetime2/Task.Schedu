@@ -173,7 +173,7 @@ namespace Task.Schedu.Utility
         /// <returns>所有启用的任务</returns>
         public static List<TaskUtil> ReadConfig()
         {
-            return SQLHelper.ToList<TaskUtil>("SELECT * FROM p_Task");
+            return SQLHelper.ToList<TaskUtil>("SELECT * FROM p_Task where Status=0");
         }
 
         /// <summary>
@@ -248,9 +248,10 @@ namespace Task.Schedu.Utility
             try
             {
                 //新增
-                if (value.TaskID == string.Empty || value.Equals("00000000-0000-0000-0000-000000000000"))
+                if (value.TaskID == string.Empty || value.TaskID.Equals("00000000-0000-0000-0000-000000000000"))
                 {
                     value.TaskID = Guid.NewGuid().ToString();
+                    value.CreatedOn = DateTime.Now;
                     //任务状态处理
 
                     cronResult = GetTaskeLastRunTime(value.CronExpressionString);

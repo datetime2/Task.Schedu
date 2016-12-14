@@ -25,6 +25,7 @@ namespace Task.Schedu.Jobs
         {
             try
             {
+                TaskLog.AutoRunLogInfo.WriteLogE("心跳检测开始");
                 object objParam = context.JobDetail.JobDataMap.Get("TaskParam");
                 if (objParam != null)
                 {
@@ -39,12 +40,10 @@ namespace Task.Schedu.Jobs
                             {
                                 startIndex = path.LastIndexOf("\\") + 1;
                                 endIndex = path.LastIndexOf(".");
-                                //进程名默认为运行程序名称
                                 processName = path.Substring(startIndex, endIndex - startIndex);
                             }
                             if (Process.GetProcessesByName(processName).ToList().Count <= 0)
                             {
-                                //不存在
                                 ProcessStartInfo ps = new ProcessStartInfo(path);
                                 ps.UseShellExecute = false;
                                 ps.CreateNoWindow = true;
@@ -53,11 +52,11 @@ namespace Task.Schedu.Jobs
                                 processName = p.ProcessName;
                             }
                             dictProcess[path] = processName;
-
                             TaskLog.AutoRunLogInfo.WriteLogE("程序:【" + processName + "】已经运行,时间:" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "||" + Process.GetProcessesByName(processName).Count());
                         }
                     }
                 }
+                TaskLog.AutoRunLogInfo.WriteLogE("心跳检测开始---无原始数据");
             }
             catch (Exception ex)
             {
