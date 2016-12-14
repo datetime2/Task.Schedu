@@ -109,6 +109,7 @@
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Task\Edit.cshtml" />
     <None Include="Views\Task\Grid.cshtml" />
+    <None Include="Views\User\Edit.cshtml" />
     <None Include="Views\User\Grid.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
@@ -194,6 +195,10 @@
     <ProjectReference Include="..\Task.Schedu.Handle\Task.Schedu.Excel\Task.Schedu.Excel.csproj">
       <Project>{9971fc17-99c2-4691-b5e2-8eea0baadeb5}</Project>
       <Name>Task.Schedu.Excel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Task.Schedu.Handle\Task.Schedu.User\Task.Schedu.User.csproj">
+      <Project>{284fe2b0-a178-4ac7-94ac-cd770e441be4}</Project>
+      <Name>Task.Schedu.User</Name>
     </ProjectReference>
     <ProjectReference Include="..\Task.Schedu.Model\Task.Schedu.Model.csproj">
       <Project>{EA03610E-2AEC-4AD3-BB8B-1118A4C119AA}</Project>

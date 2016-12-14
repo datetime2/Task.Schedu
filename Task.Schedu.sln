@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.Model", "Task.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.Excel", "Task.Schedu.Handle\Task.Schedu.Excel\Task.Schedu.Excel.csproj", "{9971FC17-99C2-4691-B5E2-8EEA0BAADEB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.User", "Task.Schedu.Handle\Task.Schedu.User\Task.Schedu.User.csproj", "{284FE2B0-A178-4AC7-94AC-CD770E441BE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +92,10 @@ Global
 		{9971FC17-99C2-4691-B5E2-8EEA0BAADEB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9971FC17-99C2-4691-B5E2-8EEA0BAADEB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9971FC17-99C2-4691-B5E2-8EEA0BAADEB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{284FE2B0-A178-4AC7-94AC-CD770E441BE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{284FE2B0-A178-4AC7-94AC-CD770E441BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{284FE2B0-A178-4AC7-94AC-CD770E441BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{284FE2B0-A178-4AC7-94AC-CD770E441BE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,5 +105,6 @@ Global
 		{F5C9ADE9-044C-4983-8DCB-F34148BE9751} = {33904A39-895B-426F-92BE-5199E6271495}
 		{722FE141-DD38-4EFD-8640-67AAA0E4C8B6} = {33904A39-895B-426F-92BE-5199E6271495}
 		{9971FC17-99C2-4691-B5E2-8EEA0BAADEB5} = {33904A39-895B-426F-92BE-5199E6271495}
+		{284FE2B0-A178-4AC7-94AC-CD770E441BE4} = {33904A39-895B-426F-92BE-5199E6271495}
 	EndGlobalSection
 EndGlobal
