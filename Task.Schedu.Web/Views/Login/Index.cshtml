@@ -48,8 +48,8 @@
                             layer.alert(data.Message);
                             return;
                         }
-                        if (typeof (afterFunc) == "function") {
-                            afterFunc(data.Result);
+                        if (data.Result.UserId) {
+                            location.href = "/Home/Index";
                         }
                     }
                 });
