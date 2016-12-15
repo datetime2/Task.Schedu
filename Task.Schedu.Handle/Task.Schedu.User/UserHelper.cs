@@ -80,7 +80,7 @@ namespace Task.Schedu.User
             return SQLHelper.Single<Users>("SELECT * FROM t_Users WHERE UserId=@UserId", new { UserId = userId });
         }
 
-        public static JsonBaseModel<Users> Login(string userName, string passWord)
+        public static JsonBaseModel<Users> Login(string userName, string passWord,string ipAddrs)
         {
             JsonBaseModel<Users> result = new JsonBaseModel<Users>();
             result.HasError = true;
@@ -94,6 +94,8 @@ namespace Task.Schedu.User
                     {
                         result.HasError = false;
                         result.Result = user;
+                        //记录登录
+                        SQLHelper.ExecuteNonQuery("UPDATE t_Users SET LastLogTime=@LastLogTime,LastLogIP=@LastLogIP WHERE UserId=@UserId", new { LastLogTime =DateTime.Now, LastLogIP= ipAddrs, UserId=user.UserId });
                     }
                     else
                         result.Message = "账号或密码错误,请重试!";

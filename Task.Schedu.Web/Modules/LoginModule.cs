@@ -22,7 +22,7 @@ namespace Task.Schedu.Web.Modules
             Post["/Info"] = x =>
             {
                 var info = this.Bind<Users>();
-                JsonBaseModel<Users> user = UserHelper.Login(info.UserName, info.PassWord);
+                JsonBaseModel<Users> user = UserHelper.Login(info.UserName, info.PassWord, Request.UserHostAddress);
                 return Response.AsJson(user);
             };
         }
