@@ -25,5 +25,18 @@ namespace Task.Schedu.User
             result.TotalPage = result.CalculateTotalPage(condition.PageSize, result.TotalCount.Value, condition.IsPagination);
             return result;
         }
+        /// <summary>
+        /// 修改用户状态
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="Status"></param>
+        public static void UpdUserStatus(string userId, int Status)
+        {
+            SQLHelper.ExecuteNonQuery("UPDATE t_Users SET Status=@Status WHERE UserId=@UserId", new { UserId = userId, Status = Status });
+        }
+        public static void DeleteById(string userId)
+        {
+            SQLHelper.ExecuteNonQuery("DELETE FROM t_Users WHERE UserId=@UserId", new { UserId = userId });
+        }
     }
 }

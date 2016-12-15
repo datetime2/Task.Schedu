@@ -1,6 +1,6 @@
 ﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase
 @{
-    ViewBag.Title = "任务列表";
+    ViewBag.Title = "用户列表";
 
 }
 @section style{
@@ -11,8 +11,8 @@
 <div class="row-fluid clearfix bb-1 mb10" id="input_custom_searchbox">
     <div class="col-sm-5 pl0">
         <div class="input-group">
-            <span class="input-group-addon">任务名称</span>
-            <input type="text" class="form-control" id="txt_TaskName">
+            <span class="input-group-addon">登录名</span>
+            <input type="text" class="form-control" id="txt_UserName">
         </div>
 
     </div>
@@ -73,10 +73,10 @@
                      {
                          "id": "Status",
                          "isMultiple": false,
-                         "title": "任务状态",
+                         "title": "用户状态",
                          "data": [
-                             { "value": "0", "text": "运行" },
-                             { "value": "1", "text": "停止" }
+                             { "value": "0", "text": "启用" },
+                             { "value": "1", "text": "停用" }
                          ]
                      }
                 ]
@@ -110,8 +110,8 @@
 
         //初始化数据
         function initData() {
-            var strEnabledHTML = '<a href="javascript:void(0)" class="action action-update pr10" title="编辑">编辑</a><a href="javascript:void(0)" class="action action-enabled pr10" title="运行任务">运行任务</a><a href="javascript:void(0)" class="action action-run pr10" title="立即运行">立即运行</a><a href="javascript:void(0)" class="action action-delete pr10" title="删除">删除</a>';
-            var strDisabledHTML = '<a href="javascript:void(0)" class="action action-update pr10" title="编辑">编辑</a><a href="javascript:void(0)" class="action action-disabled pr10" title="停止任务">停止任务</a><a href="javascript:void(0)" class="action action-run pr10" title="立即运行">立即运行</a><a href="javascript:void(0)" class="action action-delete pr10" title="删除">删除</a>';
+            var strEnabledHTML = '<a href="javascript:void(0)" class="action action-update pr10" title="编辑">编辑</a><a href="javascript:void(0)" class="action action-disabled pr10" title="启用">启用</a><a href="javascript:void(0)" class="action action-delete pr10" title="删除">删除</a>';
+            var strDisabledHTML = '<a href="javascript:void(0)" class="action action-update pr10" title="编辑">编辑</a><a href="javascript:void(0)" class="action action-run pr10" title="停用">停用</a><a href="javascript:void(0)" class="action action-delete pr10" title="删除">删除</a>';
 
             //初始化表格控件
             gridTask = new Schedu.Grid("grid_Task", {
@@ -120,10 +120,11 @@
                 url: "/User/PostQuery",
                 multiselect: true,
                 rownumbers: true,
-                colNames: ['登录帐号', '真实姓名', '状态', '创建时间', "修改时间", '说明','最后登录时间','登录IP', '操作'],
+                colNames: ['登录名', '真实姓名', '创建时间', "修改时间", '说明', '最后登录时间', '登录IP', '状态', '操作'],
                 colModel: [
                      {
                          name: 'UserName',
+                         align: "center",
                          index: 'UserName'
                      },
 
@@ -133,29 +134,8 @@
                         width: 100
                     },
                     {
-                        name: 'Status',
-                        index: 'Status',
-                        width: 100,
-                        fixed: true,
-                        align: "center",
-                        formatter: function (cellvalue, options, rowObject) {
-                            var label_class = "";
-                            switch (cellvalue) {
-                                case "运行":
-                                    label_class = "label-success";
-                                    break;
-                                case "停止":
-                                    label_class = "label-warning";
-                                    break;
-                                default:
-                                    break;
-                            }
-                            return "<span class='label {1}' title='{0}'>{0}</span>".format(cellvalue, label_class);
-                        },
-                    },
-                    {
-                        name: 'CreatOn',
-                        index: 'CreatOn',
+                        name: 'CreateOn',
+                        index: 'CreateOn',
                         width: 150,
                         align: "center",
                         formatter: "date",
@@ -188,7 +168,29 @@
                     {
                         name: 'LastLogIP',
                         index: 'LastLogIP',
+                        align: "center",
                         sortable: false
+                    },
+                    {
+                        name: 'Status',
+                        index: 'Status',
+                        width: 100,
+                        fixed: true,
+                        align: "center",
+                        formatter: function (cellvalue, options, rowObject) {
+                            var label_class = "";
+                            switch (cellvalue) {
+                                case 0:
+                                    label_class = "label-success";
+                                    break;
+                                case 1:
+                                    label_class = "label-warning";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            return "<span class='label {1}' title='{0}'>{0}</span>".format(cellvalue == 0 ? "启用" : "禁用", label_class);
+                        },
                     },
                     {
                         sortable: false,
@@ -213,18 +215,18 @@
         function handleParam(paramList) {
             var FilterList = [];
             //任务名称
-            var strTaskName = $("#txt_TaskName").val().trim();
-            if (strTaskName) {
-                FilterList.push({ "Operator": "like", "FieldName": "TaskName", "FieldValue": strTaskName });
+            var strUserName = $("#txt_UserName").val().trim();
+            if (strUserName) {
+                FilterList.push({ "Operator": "like", "FieldName": "UserName", "FieldValue": strUserName });
             }
             //创建时间
             var strCreateStart = $("#txt_createStart").val().trim();
             if (strCreateStart) {
-                FilterList.push({ "Operator": "ge", "FieldName": "CreatedOn", "FieldValue": strCreateStart, "IsDateTime": true });
+                FilterList.push({ "Operator": "ge", "FieldName": "CreateOn", "FieldValue": strCreateStart, "IsDateTime": true });
             }
             var strCreateEnd = $("#txt_createEnd").val().trim();
             if (strCreateEnd) {
-                FilterList.push({ "Operator": "le", "FieldName": "CreatedOn", "FieldValue": strCreateEnd, "IsDateTime": true });
+                FilterList.push({ "Operator": "le", "FieldName": "CreateOn", "FieldValue": strCreateEnd, "IsDateTime": true });
             }
 
             var item = null;
@@ -234,13 +236,6 @@
                 item = paramList[i];
                 value = null;
                 switch (item.id) {
-                    case "IsDisabled":
-                        if (item.ValueList.length > 0) {
-                            value = { "Operator": "eq", "FieldName": "IsDisabled", "FieldValue": item.ValueList.join(",") };
-                            FilterList.push(value);
-                        }
-                        break;
-                        //任务状态
                     case "Status":
                         if (item.ValueList.length > 0) {
                             value = { "Operator": "eq", "FieldName": "Status", "FieldValue": item.ValueList.join(",") };
@@ -280,10 +275,7 @@
                 } else if ($(this).hasClass("action-delete")) {
                     //删除
                     delTask(rowid);
-                } else if ($(this).hasClass("action-run")) {
-                    //立即运行
-                    runTask(rowid);
-                }
+                } 
             });
         }
 
@@ -317,7 +309,7 @@
                 var index;
                 $.ajax({
                     type: "delete",
-                    url: "/Task/" + rowid,
+                    url: "/User/" + rowid,
                     dataType: "json",
                     beforeSend: function () {
                         //加载等待层
@@ -343,7 +335,7 @@
             var index;
             $.ajax({
                 type: "put",
-                url: "/Task/{0}/{1}".format(rowid, status),
+                url: "/User/{0}/{1}".format(rowid, status),
                 dataType: "json",
                 beforeSend: function () {
                     //加载等待层
