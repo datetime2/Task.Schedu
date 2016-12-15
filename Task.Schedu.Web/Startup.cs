@@ -14,7 +14,7 @@ namespace Owin_Nancy
         /// 监听端口 启动站点
         /// </summary>
         /// <param name="urls">监听ip端口列表</param>
-        public static NancyHost Start(string host = "task.schedu.saas", int port = 80)
+        public static NancyHost Start(string host = "127.0.0.1", int port = 80)
         {
             try
             {

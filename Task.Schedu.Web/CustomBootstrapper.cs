@@ -1,4 +1,5 @@
 ﻿using Nancy;
+using Nancy.Authentication.Forms;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.Responses;
@@ -9,35 +10,23 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Task.Schedu.Utility;
+using Task.Schedu.Web.Modules;
 
 namespace Task.Schedu.Web
 {
     public class CustomBootstrapper : DefaultNancyBootstrapper
     {
-        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
         {
-            base.ApplicationStartup(container, pipelines);
-
-            //pipelines.BeforeRequest += ctx =>
-            //{
-            //    return null;
-            //};
-
-            pipelines.AfterRequest += ctx =>
+            base.RequestStartup(container, pipelines, context);
+            var formsAuthConfiguration = new FormsAuthenticationConfiguration
             {
-                // 如果返回状态吗码为 Unauthorized 跳转到登陆界面
-                if (ctx.Response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    ctx.Response = new RedirectResponse("/Login");//?returnUrl=" + Uri.EscapeDataString(ctx.Request.Path)
-                }
-                else if (ctx.Response.StatusCode == HttpStatusCode.NotFound)
-                {
-                    ctx.Response = new RedirectResponse("/Error/NotFound");
-                }
+                RedirectUrl = "~/Login",
+                UserMapper = container.Resolve<IUserMapper>(),
             };
+            FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
             pipelines.OnError += Error;
         }
-
         protected override IRootPathProvider RootPathProvider
         {
             get { return new CustomRootPathProvider(); }
@@ -59,6 +48,7 @@ namespace Task.Schedu.Web
         {
             base.ConfigureApplicationContainer(container);
             container.Register<ISerializer, CustomJsonNetSerializer>();
+            container.Register<IUserMapper, UserMapper>();
         }
 
         private dynamic Error(NancyContext context, Exception ex)

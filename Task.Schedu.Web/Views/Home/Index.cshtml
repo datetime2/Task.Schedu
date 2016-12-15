@@ -1,7 +1,7 @@
 ﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase
 
 @{
-    ViewBag.Title = @Model;
+    ViewBag.Title = @Model.Title;
 }
 
 @section style{
@@ -9,10 +9,10 @@
 }
 <!--头部-->
 <div class="header">
-    <h1 class="fl dis pt15">@(Model)</h1>
+    <h1 class="fl dis pt15">@Model.Title</h1>
     <ul class="fr header_right">
         <li class="fl personal_information">
-            <i class="fa fa-user" style="font-size: 16px;"></i> hi,<span>Admin</span>
+            <i class="fa fa-user" style="font-size: 16px;"></i> hi,<span>@Model.CurrentUser</span>
         </li>
         <li class="fl"><a href="javascript:void(0)" id="btn_exit"><i class="glyphicon glyphicon-off" style="color: #c60000"></i> 退出</a></li>
     </ul>
@@ -44,7 +44,7 @@
 </div>
 <!--底部-->
 <div class="myfooter">
-    版权所有：@(Model)
+    版权所有：@(Model.Title)
 </div>
 @section scripts{
     <script>

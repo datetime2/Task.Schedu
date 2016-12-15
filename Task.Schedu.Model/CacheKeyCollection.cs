@@ -7,6 +7,7 @@ namespace Task.Schedu.Model
 {
     public class CacheKeyCollection
     {
+        public static string CurrentUser = "CurrentUser";
         public static string LoginUserId = "LoginUserId";
         public static string LoginUserName = "LoginUserName";
     }

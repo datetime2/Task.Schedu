@@ -4,6 +4,11 @@ using Task.Schedu.Model;
 using Task.Schedu.User;
 using Task.Schedu.Utility;
 using System;
+using Task.Schedu.Utility.Auth;
+using Nancy.Authentication.Forms;
+using Nancy.Security;
+using Task.Schedu.Web.Model;
+
 namespace Task.Schedu.Web.Modules
 {
     public class LoginModule : NancyModule
@@ -17,19 +22,35 @@ namespace Task.Schedu.Web.Modules
             };
             Get["/Exit"] = r =>
             {
-                return Response.AsRedirect("/Login");
+               return this.LogoutAndRedirect("/Login");
             };
             Post["/Info"] = x =>
             {
                 var info = this.Bind<Users>();
                 JsonBaseModel<Users> user = UserHelper.Login(info.UserName, info.PassWord, Request.UserHostAddress);
                 if (!user.HasError && user.Result != null)
-                {
-                    Response.Context.Response.WithCookie(CacheKeyCollection.LoginUserId, user.Result.UserId, DateTime.Now.AddDays(2));
-                    Response.Context.Response.WithCookie(CacheKeyCollection.LoginUserName, user.Result.UserName, DateTime.Now.AddDays(2));
-                }
-                return Response.AsJson(user);
+                    return this.LoginAndRedirect(Guid.Parse(user.Result.UserId), fallbackRedirectUrl: "/Task");
+                else
+                    return Response.AsJson(user);
             };
+        }
+    }
+
+    public class UserMapper : IUserMapper
+    {
+        public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
+        {
+            var user = UserHelper.GetById(identifier.ToString());
+            if (user == null) return null;
+            else
+                return new UserIdentity
+                {
+                    UserName = user.UserName,
+                    Claims = new[]
+                    {
+                        user.RealName
+                    }
+                };
         }
     }
 }

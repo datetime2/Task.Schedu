@@ -1,6 +1,4 @@
-﻿using Nancy;
-using Task.Schedu.Model;
-
+﻿using Task.Schedu.Model;
 namespace Task.Schedu.Web.Modules
 {
     public class HomeModule : BaseModule
@@ -9,7 +7,11 @@ namespace Task.Schedu.Web.Modules
         {
             Get["/"] = r =>
             {
-                var model = SystemConfig.SystemTitle;
+                var model = new
+                {
+                    Title = SystemConfig.SystemTitle,
+                    CurrentUser = Context.CurrentUser.UserName
+                };
                 return View["Index", model];
             };
         }

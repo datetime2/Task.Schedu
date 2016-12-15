@@ -145,7 +145,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Windows服务安装与卸载V4.0";
+            this.Text = "Windows服务安装与卸载";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,4 +1,5 @@
 ﻿using Nancy;
+using Nancy.Security;
 using Task.Schedu.Model;
 namespace Task.Schedu.Web.Modules
 {
@@ -15,13 +16,11 @@ namespace Task.Schedu.Web.Modules
         }
         private void Init()
         {
+            this.RequiresAuthentication();
             Before += ctx =>
             {
                 ViewBag.Version = SystemConfig.StaticVersion;
-                //if (1 == 1)
-                //    return HttpStatusCode.Unauthorized;
-                //else
-                    return null;
+                return null;
             };
         }
     }

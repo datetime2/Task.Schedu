@@ -30,11 +30,6 @@ namespace Task.Schedu.Utility.Auth
         public bool IsAdmin { get; set; }
 
         /// <summary>
-        /// 当前登录用户部门GUID
-        /// </summary>
-        public string DepartmentID { get; set; }
-
-        /// <summary>
         /// 用户拥有的权限
         /// </summary>
         public List<Permission> PermissionList{ get; set; }
