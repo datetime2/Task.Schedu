@@ -11,6 +11,8 @@ namespace Task.Schedu.User
 {
     public class UserHelper
     {
+        private const string InsertUser = @"INSERT INTO t_Users (UserId,UserName,PassWord,PassSalt,RealName,Tel,Email,Status,CreateOn,Remark,ModifyOn,LastLogTime,LastLogIP) VALUES(@UserId,@UserName,@PassWord,@PassSalt,@RealName,@Tel,@Email,@Status,@CreateOn,@Remark,@ModifyOn,@LastLogTime,@LastLogIP)";
+        private const string UpdateUser = @"UPDATE t_Users SET RealName=@RealName,Tel=@Tel,Email=@Email,Status=@Status,Remark=@Remark,ModifyOn=@ModifyOn WHERE UserId=@UserId";
         public static JsonBaseModel<List<Users>> Query(QueryCondition condition)
         {
             JsonBaseModel<List<Users>> result = new JsonBaseModel<List<Users>>();
@@ -37,6 +39,45 @@ namespace Task.Schedu.User
         public static void DeleteById(string userId)
         {
             SQLHelper.ExecuteNonQuery("DELETE FROM t_Users WHERE UserId=@UserId", new { UserId = userId });
+        }
+        public static JsonBaseModel<string> SaveUser(Users value)
+        {
+            JsonBaseModel<string> result = new JsonBaseModel<string>();
+            result.HasError = true;
+            if (value == null)
+            {
+                result.Message = "参数空异常";
+                return result;
+            }
+            try
+            {
+                if (!string.IsNullOrEmpty(value.UserId))
+                {
+                    value.ModifyOn = DateTime.Now;
+                    SQLHelper.ExecuteNonQuery(UpdateUser, value);
+                }
+                else
+                {
+                    var slat = Guid.NewGuid().ToString();
+                    value.UserId = Guid.NewGuid().ToString();
+                    value.CreateOn = DateTime.Now;
+                    value.PassSalt = slat;
+                    value.PassWord = DESEncrypt.Md5Hash(DESEncrypt.Md5Hash(value.PassWord) + slat);
+                    SQLHelper.ExecuteNonQuery(InsertUser, value);
+                }
+                result.HasError = false;
+                result.Result = value.UserId;
+            }
+            catch (Exception ex)
+            {
+                result.HasError = true;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+        public static Users GetById(string userId)
+        {
+            return SQLHelper.Single<Users>("SELECT * FROM t_Users WHERE UserId=@UserId", new { UserId = userId });
         }
     }
 }

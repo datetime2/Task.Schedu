@@ -187,6 +187,7 @@
     <None Include="bin\Debug\Views\Shared\_Layout.cshtml" />
     <None Include="bin\Debug\Views\Task\Edit.cshtml" />
     <None Include="bin\Debug\Views\Task\Grid.cshtml" />
+    <None Include="bin\Debug\Views\User\Edit.cshtml" />
     <None Include="bin\Debug\Views\User\Grid.cshtml" />
     <None Include="bin\Debug\Views\_ViewStart.cshtml" />
     <None Include="Config\Config.config">

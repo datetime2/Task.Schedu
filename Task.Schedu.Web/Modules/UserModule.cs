@@ -16,13 +16,11 @@ namespace Task.Schedu.Web.Modules
         {
             Get["/"] = x => View["Grid"];
             Get["/Edit"] = x => View["Edit"];
-            //列表查询接口
             Post["/PostQuery"] = r =>
             {
                 QueryCondition condition = this.Bind<QueryCondition>();
                 return Response.AsJson(UserHelper.Query(condition));
             };
-            //更新用户状态
             Put["/{Id}/{Status:int}"] = r =>
             {
                 JsonBaseModel<string> result = new JsonBaseModel<string>();
@@ -37,7 +35,6 @@ namespace Task.Schedu.Web.Modules
                 }
                 return Response.AsJson(result);
             };
-            //
             Delete["/{Id}"] = r =>
             {
                 JsonBaseModel<string> result = new JsonBaseModel<string>();
@@ -45,6 +42,32 @@ namespace Task.Schedu.Web.Modules
                 {
                     string TaskId = r.Id;
                     UserHelper.DeleteById(TaskId);
+                }
+                catch (Exception ex)
+                {
+                    result.HasError = true;
+                    result.Message = ex.Message;
+                }
+                return Response.AsJson(result);
+            };
+            Post["/"] = r =>
+            {
+                var user = this.Bind<Users>();
+                return Response.AsJson(UserHelper.SaveUser(user));
+            };
+            Put["/"] = r =>
+            {
+                var user = this.Bind<Users>();
+                return Response.AsJson(UserHelper.SaveUser(user));
+            };
+            Get["/GetById/{Id}"] = r =>
+            {
+                JsonBaseModel<Users> result = new JsonBaseModel<Users>();
+                try
+                {
+                    //取出单条记录数据
+                    string TaskId = r.Id;
+                    result.Result = UserHelper.GetById(TaskId);
                 }
                 catch (Exception ex)
                 {

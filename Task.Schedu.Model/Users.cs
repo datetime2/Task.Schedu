@@ -18,5 +18,7 @@ namespace Task.Schedu.Model
         public string Remark { get; set; }
         public string LastLogIP { get; set; }
         public DateTime? LastLogTime { get; set; }
+        public string Tel { get; set; }
+        public string Email { get; set; }
     }
 }

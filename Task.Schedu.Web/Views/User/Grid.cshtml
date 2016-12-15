@@ -111,7 +111,7 @@
         //初始化数据
         function initData() {
             var strEnabledHTML = '<a href="javascript:void(0)" class="action action-update pr10" title="编辑">编辑</a><a href="javascript:void(0)" class="action action-disabled pr10" title="启用">启用</a><a href="javascript:void(0)" class="action action-delete pr10" title="删除">删除</a>';
-            var strDisabledHTML = '<a href="javascript:void(0)" class="action action-update pr10" title="编辑">编辑</a><a href="javascript:void(0)" class="action action-run pr10" title="停用">停用</a><a href="javascript:void(0)" class="action action-delete pr10" title="删除">删除</a>';
+            var strDisabledHTML = '<a href="javascript:void(0)" class="action action-update pr10" title="编辑">编辑</a><a href="javascript:void(0)" class="action action-enabled pr10" title="禁用">禁用</a><a href="javascript:void(0)" class="action action-delete pr10" title="删除">删除</a>';
 
             //初始化表格控件
             gridTask = new Schedu.Grid("grid_Task", {
@@ -120,7 +120,7 @@
                 url: "/User/PostQuery",
                 multiselect: true,
                 rownumbers: true,
-                colNames: ['登录名', '真实姓名', '创建时间', "修改时间", '说明', '最后登录时间', '登录IP', '状态', '操作'],
+                colNames: ['登录名', '真实姓名', '创建时间', "修改时间", '最后登录时间', '登录IP', '说明', '状态', '操作'],
                 colModel: [
                      {
                          name: 'UserName',
@@ -131,6 +131,7 @@
                     {
                         name: 'RealName',
                         index: 'RealName',
+                        align: "center",
                         width: 100
                     },
                     {
@@ -152,11 +153,6 @@
                         formatoptions: { srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s' }
                     },
                     {
-                        name: 'Remark',
-                        index: 'Remark',
-                        sortable: false
-                    },
-                    {
                         name: 'LastLogTime',
                         index: 'LastLogTime',
                         width: 150,
@@ -169,6 +165,11 @@
                         name: 'LastLogIP',
                         index: 'LastLogIP',
                         align: "center",
+                        sortable: false
+                    },
+                    {
+                        name: 'Remark',
+                        index: 'Remark',
                         sortable: false
                     },
                     {
@@ -268,14 +269,14 @@
                     openEditWin(WebState.EDIT, rowid);
                 } else if ($(this).hasClass("action-enabled")) {
                     //运行任务
-                    updateTaskStatus(rowid, 0);
+                    updateTaskStatus(rowid, 1);
                 } else if ($(this).hasClass("action-disabled")) {
                     //停止任务
-                    updateTaskStatus(rowid, 1);
+                    updateTaskStatus(rowid, 0);
                 } else if ($(this).hasClass("action-delete")) {
                     //删除
                     delTask(rowid);
-                } 
+                }
             });
         }
 

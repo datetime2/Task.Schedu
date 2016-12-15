@@ -1,13 +1,13 @@
 ﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase
 @{
-    ViewBag.Title = "任务详情";
+    ViewBag.Title = "用户详情";
 }
 @section style{
     <link rel="stylesheet" href="/Content/Scripts/plugins/iCheck/custom.css" />
 }
 
 <form class="form-horizontal" id="form_baseInfo" style="margin-top:20px;">
-    <input name="TaskID" type="hidden" />
+    <input name="UserId" type="hidden" />
     <div class="row-fluid col-sm-10 col-sm-offset-1 mb15">
         <p class="f16 fb">基本信息</p>
         <hr>
@@ -16,33 +16,33 @@
         <div class="col-xs-6">
             <div class="form-group">
                 <label class="col-sm-4 control-label">
-                    <span class="editing-mode f-sign">* </span>任务名称：
+                    <span class="editing-mode f-sign">* </span>登陆账号：
                 </label>
                 <div class="col-sm-7">
-                    <input name="TaskName" type="text" class="form-control" required maxlength="100" placeholder="请输入任务名称">
+                    <input name="UserName" type="text" class="form-control" required maxlength="50" placeholder="请输入登陆账号">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-4 control-label">
-                    <span class="editing-mode f-sign">* </span>程序集名称：
+                    <span class="editing-mode f-sign">* </span>登陆密码：
                 </label>
                 <div class="col-sm-7">
-                    <input name="Assembly" type="text" class="form-control" required maxlength="2000" placeholder="请输入程序集">
+                    <input name="PassWord" type="password" class="form-control" required maxlength="50" placeholder="请输入登陆密码">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-4 control-label">
-                    <span class="editing-mode f-sign">* </span>任务状态：
+                    <span class="editing-mode f-sign">* </span>登录状态：
                 </label>
                 <div class="col-sm-7">
                     <div class="radio i-checks">
                         <label>
-                            <input type="radio" disabled checked value="0" name="Status"><i></i>运行
+                            <input type="radio" disabled checked value="0" name="Status"><i></i>启用
                         </label>
                         <label>
-                            <input type="radio" disabled value="1" name="Status"><i></i>停止
+                            <input type="radio" disabled value="1" name="Status"><i></i>禁用
                         </label>
                     </div>
                 </div>
@@ -51,26 +51,26 @@
         <div class="col-xs-6">
             <div class="form-group">
                 <label class="col-sm-3 control-label">
-                    <span class="editing-mode f-sign">* </span>Cron表达式：
+                    <span class="editing-mode f-sign">* </span>联系电话：
                 </label>
                 <div class="col-sm-7">
-                    <input name="CronExpressionString" type="text" class="form-control" required maxlength="200" placeholder="请输入Cron表达式">
+                    <input name="Tel" type="text" class="form-control" maxlength="20" placeholder="请输入联系电话">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">
-                    <span class="editing-mode f-sign">* </span>表达式说明：
+                    <span class="editing-mode f-sign">* </span>联系邮箱：
                 </label>
                 <div class="col-sm-7">
-                    <input name="CronRemark" type="text" class="form-control" required maxlength="200" placeholder="请输入表达式说明">
+                    <input name="Email" type="text" class="form-control" maxlength="80" placeholder="请输入联系邮箱">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">
-                    <span class="editing-mode f-sign">* </span>类名(包含命名空间)：
+                    <span class="editing-mode f-sign">* </span>真实姓名：
                 </label>
                 <div class="col-sm-7">
-                    <input name="Class" type="text" class="form-control" required maxlength="2000" placeholder="请输入类名">
+                    <input name="RealName" type="text" class="form-control" required maxlength="50" placeholder="请输入真实姓名">
                 </div>
             </div>
          
@@ -125,7 +125,7 @@
                 var index;
                 $.ajax({
                     type: "get",
-                    url: "/Task/GetByID/" + id,
+                    url: "/User/GetByID/" + id,
                     dataType: "json",
                     beforeSend: function () {
                         //加载等待层
@@ -157,11 +157,11 @@
             var data = formBaseInfo.getData();
 
             var type = "post";
-            var url = "/Task";
-            if (data.TaskID) {
+            var url = "/User";
+            if (data.UserId) {
                 type = "put";
             } else {
-                data.TaskID = '@Guid.Empty.ToString()';
+                data.UserId = '';
             }
             var index;
             $.ajax({
