@@ -16,7 +16,8 @@ namespace Task.Schedu.Web.Modules
 
         private void Init()
         {
-            Before += ctx => {
+            Before += ctx => 
+            {
                 //静态资源版本
                 ViewBag.Version = SystemConfig.StaticVersion;
                 return null;

@@ -17,8 +17,7 @@ namespace Task.Schedu.Web.Modules
             };
             Get["/Exit"] = r =>
             {
-                var model = "我是 Razor 引擎";
-                return View["Exit", model];
+                return Response.AsRedirect("/");
             };
             Post["/Info"] = x =>
             {

@@ -269,9 +269,6 @@
     <Content Include="bin\Debug\Content\Scripts\plugins\webuploader\webuploader.withoutimage.min.js" />
     <Content Include="bin\Debug\Task\Task.Schedu.Jobs.dll" />
     <Content Include="bin\Debug\Views\Error\NotFound.html" />
-    <Content Include="DLL\HtmlAgilityPack.dll" />
-    <Content Include="DLL\HttpHelper.dll" />
-    <Content Include="favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

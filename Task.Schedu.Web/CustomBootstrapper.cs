@@ -1,12 +1,4 @@
-﻿/*
- * Model: 模块名称
- * Desctiption: 描述
- * Author: 杜冬军
- * Created: 2016/2/23 9:00:30 
- * Copyright：武汉中科通达高新技术股份有限公司
- */
-
-using Nancy;
+﻿using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.Responses;
@@ -43,7 +35,6 @@ namespace Task.Schedu.Web
                     ctx.Response = new RedirectResponse("/Error/NotFound?returnUrl=" + Uri.EscapeDataString(ctx.Request.Path));
                 }
             };
-
             pipelines.OnError += Error;
         }
 
@@ -59,23 +50,19 @@ namespace Task.Schedu.Web
         protected override void ConfigureConventions(NancyConventions conventions)
         {
             base.ConfigureConventions(conventions);
-
             ///静态文件夹访问 设置 css,js,image
             conventions.StaticContentsConventions.AddDirectory("Content");
-            //TempFile文件夹
             conventions.StaticContentsConventions.AddDirectory("TempFile");
         }
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
         {
             base.ConfigureApplicationContainer(container);
-            //替换默认序列化方式
             container.Register<ISerializer, CustomJsonNetSerializer>();
         }
 
         private dynamic Error(NancyContext context, Exception ex)
         {
-            //可以使用log4net记录异常 ex 这里直接返回异常信息
             LogHelper.WriteLog("Web站点请求异常", ex);
             return ex.Message;
         }
@@ -89,7 +76,6 @@ namespace Task.Schedu.Web
             return ROOT_PATH;
         }
     }
-
     /// <summary>
     /// 使用Newtonsoft.Json 替换Nancy默认的序列化方式
     /// </summary>
@@ -116,7 +102,6 @@ namespace Task.Schedu.Web
                 Serialize(jsonWriter, model);
             }
         }
-
         public IEnumerable<string> Extensions { get { yield return "json"; } }
     }
 }
