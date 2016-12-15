@@ -17,7 +17,7 @@ namespace Task.Schedu.Web.Modules
             };
             Get["/Exit"] = r =>
             {
-                return Response.AsRedirect("/");
+                return Response.AsRedirect("/Login");
             };
             Post["/Info"] = x =>
             {

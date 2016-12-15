@@ -14,7 +14,7 @@
         <li class="fl personal_information">
             <i class="fa fa-user" style="font-size: 16px;"></i> hi,<span>Admin</span>
         </li>
-        <li class="fl"><a href="/Login/Exit"><i class="glyphicon glyphicon-off" style="color: #c60000"></i> 退出</a></li>
+        <li class="fl"><a href="javascript:void(0)" id="btn_exit"><i class="glyphicon glyphicon-off" style="color: #c60000"></i> 退出</a></li>
     </ul>
 </div>
 <div class="content">
@@ -68,7 +68,12 @@
             $('.navBar').on('click', function () {
                 var url = $(this).attr('data-url');
                 $('#mainUrl').attr({ src: url })
-            })
+            });
+            $("#btn_exit").on("click", function () {
+                Schedu.delConfirm(function () {
+                    location.href = '/Login/Exit';
+                },"确定退出?");
+            });
         })
     </script>
 }
