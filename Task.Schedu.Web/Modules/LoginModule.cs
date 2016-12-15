@@ -4,7 +4,6 @@ using Task.Schedu.Model;
 using Task.Schedu.User;
 using Task.Schedu.Utility;
 using System;
-using Task.Schedu.Utility.Auth;
 using Nancy.Authentication.Forms;
 using Nancy.Security;
 using Task.Schedu.Web.Model;
@@ -13,25 +12,25 @@ namespace Task.Schedu.Web.Modules
 {
     public class LoginModule : NancyModule
     {
-        public LoginModule() : base("Login")
+        public LoginModule()
         {
-            Get["/"] = r =>
+            Get["/Login"] = r =>
             {
                 var model = SystemConfig.SystemTitle;
                 return View["Index", model];
             };
-            Get["/Exit"] = r =>
+            Get["/Login/Exit"] = r =>
             {
                return this.LogoutAndRedirect("/Login");
             };
-            Post["/Info"] = x =>
+            Post["/Login/Info"] = x =>
             {
                 var info = this.Bind<Users>();
                 JsonBaseModel<Users> user = UserHelper.Login(info.UserName, info.PassWord, Request.UserHostAddress);
                 if (!user.HasError && user.Result != null)
                     return this.LoginAndRedirect(Guid.Parse(user.Result.UserId), fallbackRedirectUrl: "/Home");
                 else
-                    return Response.AsJson(user);
+                    return Response.AsText("出错了", "text/html;charset=UTF-8");
             };
         }
     }
