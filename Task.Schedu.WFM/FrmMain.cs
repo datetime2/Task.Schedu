@@ -6,7 +6,7 @@ using System.Configuration.Install;
 using System.ServiceProcess;
 using System.Reflection;
 
-namespace WSWinForm
+namespace Task.Schedu.WFM
 {
     public partial class FrmMain : Form
     {

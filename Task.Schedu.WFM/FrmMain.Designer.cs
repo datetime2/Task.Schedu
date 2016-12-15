@@ -1,4 +1,4 @@
-﻿namespace WSWinForm
+﻿namespace Task.Schedu.WFM
 {
     partial class FrmMain
     {

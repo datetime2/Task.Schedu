@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace WSWinForm
+namespace Task.Schedu.WFM
 {
     static class Program
     {
