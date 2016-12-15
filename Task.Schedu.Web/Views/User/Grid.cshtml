@@ -39,7 +39,7 @@
 </div>
 
 <!-- 列表 -->
-<table id="grid_Task"></table>
+<table id="grid_User"></table>
 
 @section scripts{
     <!-- jqGrid -->
@@ -47,7 +47,7 @@
     <script src="~/Content/Scripts/plugins/jqgrid/jquery.jqGrid.min.js"></script>
     <script src="~/Content/Scripts/plugins/layer/laydate/laydate.js"></script>
     <script>
-        var gridTask = null;
+        var gridUser = null;
         $(function () {
             //初始化查询控件
             initSearchBox();
@@ -64,7 +64,7 @@
             var options = {
                 //查询事件
                 "search": function (paramList) {
-                    gridTask.load(handleParam(paramList));
+                    gridUser.load(handleParam(paramList));
                 },
                 //默认展开条件数
                 "expandRow": 2,
@@ -114,7 +114,7 @@
             var strDisabledHTML = '<a href="javascript:void(0)" class="action action-update pr10" title="编辑">编辑</a><a href="javascript:void(0)" class="action action-enabled pr10" title="禁用">禁用</a><a href="javascript:void(0)" class="action action-delete pr10" title="删除">删除</a>';
 
             //初始化表格控件
-            gridTask = new Schedu.Grid("grid_Task", {
+            gridUser = new Schedu.Grid("grid_User", {
                 idField: "UserId",
                 height: calcGridHeight(),
                 url: "/User/PostQuery",
@@ -260,23 +260,23 @@
             //搜索
             $("#btn_search").on("click", function () {
                 var paramList = $(".searchbox").getParamList();
-                gridTask.load(handleParam(paramList));
+                gridUser.load(handleParam(paramList));
             });
             //操作列点击事件
-            $("#grid_Task").on("click", "a.action", function () {
+            $("#grid_User").on("click", "a.action", function () {
                 var rowid = $(this).parent().attr("data-index");
                 if ($(this).hasClass("action-update")) {
                     //修改
                     openEditWin(WebState.EDIT, rowid);
                 } else if ($(this).hasClass("action-enabled")) {
                     //运行任务
-                    updateTaskStatus(rowid, 1);
+                    updateUserStatus(rowid, 1);
                 } else if ($(this).hasClass("action-disabled")) {
                     //停止任务
-                    updateTaskStatus(rowid, 0);
+                    updateUserStatus(rowid, 0);
                 } else if ($(this).hasClass("action-delete")) {
                     //删除
-                    delTask(rowid);
+                    delUser(rowid);
                 }
             });
         }
@@ -291,20 +291,20 @@
                 type: 2,
                 shift: -1, //禁止弹出时动画效果
                 move: false, //禁止窗口移动
-                title: WebStateCN[mode] + '任务',
+                title: WebStateCN[mode] + '用户',
                 shade: 0.8,
                 area: ['100%', '100%'],
                 content: "/User/Edit?" + decodeURIComponent(jQuery.param(params)),
                 end: function () {
                     if (mode != WebState.READ) {
-                        gridTask.reload();
+                        gridUser.reload();
                     }
                 }
             });
         }
 
         //删除任务
-        function delTask(rowid) {
+        function delUser(rowid) {
 
             Schedu.delConfirm(function () {
                 //加载等待层
@@ -324,7 +324,7 @@
                         if (data.HasError) {
                             layer.alert(data.Message);
                         } else {
-                            gridTask.reload();
+                            gridUser.reload();
                         }
                     }
                 });
@@ -332,7 +332,7 @@
         }
 
         //更新任务状态
-        function updateTaskStatus(rowid, status) {
+        function updateUserStatus(rowid, status) {
             //加载等待层
             var index;
             $.ajax({
@@ -350,7 +350,7 @@
                     if (data.HasError) {
                         layer.alert(data.Message);
                     } else {
-                        gridTask.reload();
+                        gridUser.reload();
                     }
                 }
             });
