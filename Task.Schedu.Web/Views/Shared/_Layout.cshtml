@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/Image/favicon.ico">
-    <title>@ViewBag.Title</title>
+    <title>@(ViewBag.Title)</title>
     <link href="~/Content/Css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/Css/common.css" rel="stylesheet">
     <link href="~/Content/Css/style.css" rel="stylesheet">
@@ -18,15 +18,11 @@
 </head>
 <body>
     @RenderBody()
-
     <script src="~/Content/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Content/Scripts/bootstrap.min.js"></script>
-    <!--layer-->
     <script src="~/Content/Scripts/plugins/layer/layer.min.js"></script>
-    <!-- 自定义 -->
-    <script src="~/Content/Scripts/framework.js?ver=@ViewBag.Version"></script>
+    <script src="~/Content/Scripts/framework.js"></script>
     @RenderSection("scripts", required: false)
-
     <!--输出get请求参数到隐藏控件中，js中可以通过__a.value 形式来获取url参数 -->
     @{
         var qs = Context.Request.Query;

@@ -79,5 +79,31 @@ namespace Task.Schedu.User
         {
             return SQLHelper.Single<Users>("SELECT * FROM t_Users WHERE UserId=@UserId", new { UserId = userId });
         }
+
+        public static JsonBaseModel<Users> Login(string userName, string passWord)
+        {
+            JsonBaseModel<Users> result = new JsonBaseModel<Users>();
+            result.HasError = true;
+            var user = SQLHelper.Single<Users>("SELECT * FROM t_Users WHERE UserName=@UserName", new { UserName = userName });
+            if (user != null)
+            {
+                if (user.Status == 0)
+                {
+                    var logPass = DESEncrypt.Md5Hash(DESEncrypt.Md5Hash(passWord) + user.PassSalt);//实际应用passWord 应传输MD5串
+                    if (user.PassWord.Equals(logPass))
+                    {
+                        result.HasError = false;
+                        result.Result = user;
+                    }
+                    else
+                        result.Message = "账号或密码错误,请重试!";
+                }
+                else
+                    result.Message = "账号已被禁用,请联系管理员!";
+            }
+            else
+                result.Message = "账号或密码错误,请重试!";
+            return result;
+        }
     }
 }
