@@ -29,7 +29,7 @@ namespace Task.Schedu.Web.Modules
                 var info = this.Bind<Users>();
                 JsonBaseModel<Users> user = UserHelper.Login(info.UserName, info.PassWord, Request.UserHostAddress);
                 if (!user.HasError && user.Result != null)
-                    return this.LoginAndRedirect(Guid.Parse(user.Result.UserId), fallbackRedirectUrl: "/Task");
+                    return this.LoginAndRedirect(Guid.Parse(user.Result.UserId), fallbackRedirectUrl: "/Home");
                 else
                     return Response.AsJson(user);
             };
