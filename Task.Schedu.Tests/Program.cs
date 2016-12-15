@@ -37,7 +37,7 @@ namespace Task.Schedu.Tests
             try
             {
                 //启动站点
-                using (NancyHost host = Startup.Start(SystemConfig.WebPort))
+                using (NancyHost host = Startup.Start(SystemConfig.WebHost, SystemConfig.WebPort))
                 {
                     //调用系统默认的浏览器   
                     string url = string.Format("http://127.0.0.1:{0}", SystemConfig.WebPort);

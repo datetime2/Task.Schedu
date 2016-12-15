@@ -30,9 +30,14 @@ namespace Task.Schedu.Model
         public static bool ShowException { get; set; }
 
         /// <summary>
-        /// MQ连接端口
+        /// 管理站点端口
         /// </summary>
         [Config(Name = "管理站点端口", DefaultValue = "9000", ValidateRule = "min=0 digits=true")]
         public static int WebPort { get; set; }
+        /// <summary>
+        /// 管理站点Host地址
+        /// </summary>
+        [Config(Name = "管理站点Host地址", DefaultValue = "127.0.0.1")]
+        public static string WebHost { get; set; }
     }
 }

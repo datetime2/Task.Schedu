@@ -28,11 +28,11 @@ namespace Task.Schedu.Web
                 // 如果返回状态吗码为 Unauthorized 跳转到登陆界面
                 if (ctx.Response.StatusCode == HttpStatusCode.Unauthorized)
                 {
-                    ctx.Response = new RedirectResponse("/Login?returnUrl=" + Uri.EscapeDataString(ctx.Request.Path));
+                    ctx.Response = new RedirectResponse("/Login");//?returnUrl=" + Uri.EscapeDataString(ctx.Request.Path)
                 }
                 else if (ctx.Response.StatusCode == HttpStatusCode.NotFound)
                 {
-                    ctx.Response = new RedirectResponse("/Error/NotFound?returnUrl=" + Uri.EscapeDataString(ctx.Request.Path));
+                    ctx.Response = new RedirectResponse("/Error/NotFound");
                 }
             };
             pipelines.OnError += Error;

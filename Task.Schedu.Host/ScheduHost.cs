@@ -40,7 +40,7 @@ namespace Task.Schedu.Host
             ThreadPool.QueueUserWorkItem((o) =>
             {
                 //启动站点
-                Startup.Start(SystemConfig.WebPort);
+                Startup.Start(SystemConfig.WebHost,SystemConfig.WebPort);
             });
         }
 

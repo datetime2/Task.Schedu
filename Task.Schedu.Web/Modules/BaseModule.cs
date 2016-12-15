@@ -13,14 +13,15 @@ namespace Task.Schedu.Web.Modules
         {
             Init();
         }
-
         private void Init()
         {
-            Before += ctx => 
+            Before += ctx =>
             {
-                //静态资源版本
                 ViewBag.Version = SystemConfig.StaticVersion;
-                return null;
+                //if (1 == 1)
+                //    return HttpStatusCode.Unauthorized;
+                //else
+                    return null;
             };
         }
     }

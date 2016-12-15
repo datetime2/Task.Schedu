@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheKeyCollection.cs" />
     <Compile Include="ConfigOption.cs" />
     <Compile Include="Config\ConfigAttribute.cs" />
     <Compile Include="Config\ConfigDescription.cs" />
