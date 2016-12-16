@@ -12,10 +12,12 @@ namespace Task.Schedu.Jobs
     /// <summary>
     /// 发送消息任务
     /// </summary>
-    ///<remarks>DisallowConcurrentExecution属性标记任务不可并行，要是上一任务没运行完即使到了运行时间也不会运行</remarks>
     [DisallowConcurrentExecution]
     public class SendMessageJob : IJob
     {
+        /// 取出t_Message表里面所有数据进行发送
+        /// </summary>
+        private static readonly string strSQL2 = @"SELECT MessageGuid,Receiver,Content,Subject,Type,CreatedOn FROM t_Message ";
         public void Execute(IJobExecutionContext context)
         {
             try
@@ -49,42 +51,5 @@ namespace Task.Schedu.Jobs
                 e2.RefireImmediately = true;
             }
         }
-
-        ///// <summary>
-        ///// 取带发送消息(与历史表进行对比,超过3分钟最长的第一条)
-        ///// </summary>
-        //private static readonly string strSQL = @"
-        //        SELECT MessageGuid,Receiver,Content,Subject,Type,CreatedOn FROM (       
-	       //         SELECT *,ROW_NUMBER() OVER ( PARTITION BY Receiver ORDER BY Interval DESC ) AS RowNum FROM 
-	       //         (
-		      //          SELECT A.*,DATEDIFF(MINUTE,ISNULL(B.SendOn,'1900-01-01'),A.CreatedOn) AS Interval FROM t_Message AS A
-		      //          LEFT JOIN 
-		      //          (       
-			     //           SELECT  
-				    //            Receiver ,SendOn,
-				    //            ROW_NUMBER() OVER ( PARTITION BY Receiver ORDER BY SendOn DESC ) AS Num
-			     //           FROM    t_MessageHistory 
-		      //          )AS B
-		      //          ON A.Receiver = B.Receiver AND B.Num=1
-	       //         )AS C
-        //        )AS D
-        //        WHERE D.RowNum=1";
-
-        /// <summary>
-        /// 取带发送消息(与数据库时间进行对比,超过3分钟最长的第一条)
-        /// </summary>
-        //private static readonly string strSQL1 = @"
-        //    SELECT MessageGuid,Receiver,Content,Subject,Type,CreatedOn FROM (
-	       //     SELECT  * ,
-			     //       ROW_NUMBER() OVER ( PARTITION BY Receiver ORDER BY CreatedOn DESC ) AS RowNum
-	       //     FROM    t_Message
-	       //     WHERE   DATEDIFF(MINUTE, CreatedOn, GETDATE()) > 3
-        //    )AS A
-        //    WHERE A.RowNum=1";
-
-        /// <summary>
-        /// 取出t_Message表里面所有数据进行发送
-        /// </summary>
-        private static readonly string strSQL2 = @"SELECT MessageGuid,Receiver,Content,Subject,Type,CreatedOn FROM t_Message ";
     }
 }

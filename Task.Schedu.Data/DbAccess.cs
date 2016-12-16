@@ -82,13 +82,13 @@
             switch (dbType)
             {
                 case DbType.SqlServer:
-                    connection = new SqlConnection(sqlConnect);
+                    connection = new SqlConnection("");
                     config = new DapperExtensionsConfiguration(typeof(AutoClassMapper<>), new List<Assembly>(),
                         new SqlServerDialect());
 
                     break;
                 case DbType.MySql:
-                    connection = new MySqlConnection(sqlConnect);
+                    connection = new MySqlConnection("");
                     config = new DapperExtensionsConfiguration(typeof(AutoClassMapper<>), new List<Assembly>(),
                         new MySqlDialect());
                     break;

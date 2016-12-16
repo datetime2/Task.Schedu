@@ -28,9 +28,9 @@ namespace Task.Schedu.Web.Modules
                 var info = this.Bind<Users>();
                 JsonBaseModel<Users> user = UserHelper.Login(info.UserName, info.PassWord, Request.UserHostAddress);
                 if (!user.HasError && user.Result != null)
-                    return this.LoginAndRedirect(Guid.Parse(user.Result.UserId), fallbackRedirectUrl: "/Home");
+                    return this.LoginAndRedirect(Guid.Parse(user.Result.UserId), cookieExpiry: DateTime.Now.AddMinutes(2), fallbackRedirectUrl: "/Home");
                 else
-                    return Response.AsText("出错了", "text/html;charset=UTF-8");
+                    return Response.AsJson(user);
             };
         }
     }

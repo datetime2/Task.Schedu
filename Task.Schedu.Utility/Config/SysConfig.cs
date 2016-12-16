@@ -15,9 +15,14 @@
     public class SysConfig
     {
         /// <summary>
-        /// 数据库连接字符串信息
+        /// Task 调度数据库连接字符串
         /// </summary>
         [PathMap(Key = "SqlConnect")]
         public static string SqlConnect { get; set; }
+        /// <summary>
+        /// 业务数据库链接字符串
+        /// </summary>
+        [PathMap(Key = "WorkSqlConnect")]
+        public static string WorkSqlConnect { get; set; }
     }
 }
