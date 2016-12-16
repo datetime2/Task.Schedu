@@ -30,13 +30,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.Quarzt", "Task.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.ConfigHandler", "Task.Schedu.Handle\Task.Schedu.ConfigHandler\Task.Schedu.ConfigHandler.csproj", "{F5C9ADE9-044C-4983-8DCB-F34148BE9751}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schdeu.Message", "Task.Schedu.Handle\Task.Schdeu.Message\Task.Schdeu.Message.csproj", "{722FE141-DD38-4EFD-8640-67AAA0E4C8B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.Message", "Task.Schedu.Handle\Task.Schedu.Message\Task.Schedu.Message.csproj", "{722FE141-DD38-4EFD-8640-67AAA0E4C8B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.Model", "Task.Schedu.Model\Task.Schedu.Model.csproj", "{EA03610E-2AEC-4AD3-BB8B-1118A4C119AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.Excel", "Task.Schedu.Handle\Task.Schedu.Excel\Task.Schedu.Excel.csproj", "{9971FC17-99C2-4691-B5E2-8EEA0BAADEB5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.User", "Task.Schedu.Handle\Task.Schedu.User\Task.Schedu.User.csproj", "{284FE2B0-A178-4AC7-94AC-CD770E441BE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task.Schedu.Handle.Job", "Task.Schedu.Handle.Job", "{FBB52525-E7F2-4FAB-9428-D2D004673385}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

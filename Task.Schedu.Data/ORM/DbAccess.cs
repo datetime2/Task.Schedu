@@ -19,13 +19,18 @@
     }
     public class DbAccess<T>
     {
+        protected DbType _dbType = DbType.MySql;
+        public DbAccess(DbType dbType)
+        {
+            this._dbType = dbType;
+        }
         /// <summary>
         /// Void
         /// </summary>
         /// <param name="action"></param>
-        protected void Void(Action<IDatabase> action)
+        protected void Void(Action<IDatabase> action, string dbConnect)
         {
-            using (var client = DbFactory.CreateDb(DbType.MySql))
+            using (var client = DbFactory.CreateDb(_dbType, dbConnect))
             {
                 action(client);
             }
@@ -36,9 +41,9 @@
         /// </summary>
         /// <param name="func"></param>
         /// <returns></returns>
-        protected IEnumerable<T> FindBy(Func<IDatabase, IEnumerable<T>> func)
+        protected IEnumerable<T> FindBy(Func<IDatabase, IEnumerable<T>> func, string dbConnect)
         {
-            using (var client = DbFactory.CreateDb(DbType.MySql))
+            using (var client = DbFactory.CreateDb(_dbType, dbConnect))
             {
                 return func(client);
             }
@@ -48,9 +53,9 @@
         /// </summary>
         /// <param name="func"></param>
         /// <returns></returns>
-        protected T FirstOrDefault(Func<IDatabase, T> func)
+        protected T FirstOrDefault(Func<IDatabase, T> func, string dbConnect)
         {
-            using (var client = DbFactory.CreateDb(DbType.MySql))
+            using (var client = DbFactory.CreateDb(_dbType, dbConnect))
             {
                 return func(client);
             }
@@ -60,9 +65,9 @@
         /// </summary>
         /// <param name="func"></param>
         /// <returns></returns>
-        protected bool Commit(Func<IDatabase, bool> func)
+        protected bool Commit(Func<IDatabase, bool> func, string dbConnect)
         {
-            using (var client = DbFactory.CreateDb(DbType.MySql))
+            using (var client = DbFactory.CreateDb(_dbType, dbConnect))
             {
                 return func(client);
             }
@@ -74,7 +79,7 @@
     /// </summary>
     public static class DbFactory
     {
-        public static IDatabase CreateDb(DbType dbType)
+        public static IDatabase CreateDb(DbType dbType, string dbConnect)
         {
             IDbConnection connection = null;
             IDatabase dbDatabase = null;
@@ -82,13 +87,13 @@
             switch (dbType)
             {
                 case DbType.SqlServer:
-                    connection = new SqlConnection("");
+                    connection = new SqlConnection(dbConnect);
                     config = new DapperExtensionsConfiguration(typeof(AutoClassMapper<>), new List<Assembly>(),
                         new SqlServerDialect());
 
                     break;
                 case DbType.MySql:
-                    connection = new MySqlConnection("");
+                    connection = new MySqlConnection(dbConnect);
                     config = new DapperExtensionsConfiguration(typeof(AutoClassMapper<>), new List<Assembly>(),
                         new MySqlDialect());
                     break;

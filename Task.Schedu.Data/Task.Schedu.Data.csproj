@@ -57,10 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbAccess.cs" />
-    <Compile Include="DbHelper.cs" />
-    <Compile Include="Pagination.cs" />
-    <Compile Include="SQLHelper.cs" />
+    <Compile Include="ORM\DbAccess.cs" />
+    <Compile Include="ADO\DbHelper.cs" />
+    <Compile Include="ADO\Pagination.cs" />
+    <Compile Include="ADO\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@
     /// 系统相关配置信息都应该通过此类的静态属性读取
     /// </remarks>
     /// <example>
-    /// 获取连接字符串 SysConfig.SqlConnect
+    /// 获取连接字符串 SysConfig.ScheduConnect
     /// </example>
     /// <summary>
     /// 系统的配置
@@ -15,14 +15,24 @@
     public class SysConfig
     {
         /// <summary>
-        /// Task 调度数据库连接字符串
+        /// Task调度数据库连接字符串
         /// </summary>
-        [PathMap(Key = "SqlConnect")]
-        public static string SqlConnect { get; set; }
+        [PathMap(Key = "ScheduConnect")]
+        public static string ScheduConnect { get; set; }
         /// <summary>
-        /// 业务数据库链接字符串
+        /// 评论业务数据库链接字符串
         /// </summary>
-        [PathMap(Key = "WorkSqlConnect")]
-        public static string WorkSqlConnect { get; set; }
+        [PathMap(Key = "CommentConnect")]
+        public static string CommentConnect { get; set; }
+        /// <summary>
+        /// 会员业务数据库链接字符串
+        /// </summary>
+        [PathMap(Key = "MemberConnect")]
+        public static string MemberConnect { get; set; }
+        /// <summary>
+        /// 配置业务数据库链接字符串
+        /// </summary>
+        [PathMap(Key = "SettingConnect")]
+        public static string SettingConnect { get; set; }
     }
 }

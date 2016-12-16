@@ -70,6 +70,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Order\CloseOrderWithNoPay.cs" />
+    <Compile Include="Order\ConfirmOrderWithNoRecive.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Jobs\OrderNoPayCloseJob.cs" />
     <Compile Include="Jobs\TestJob.cs" />
@@ -78,9 +80,9 @@
     <Compile Include="Utils\TaskLog.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Task.Schedu.Handle\Task.Schdeu.Message\Task.Schdeu.Message.csproj">
+    <ProjectReference Include="..\Task.Schedu.Handle\Task.Schedu.Message\Task.Schedu.Message.csproj">
       <Project>{722fe141-dd38-4efd-8640-67aaa0e4c8b6}</Project>
-      <Name>Task.Schdeu.Message</Name>
+      <Name>Task.Schedu.Message</Name>
     </ProjectReference>
     <ProjectReference Include="..\Task.Schedu.Data\Task.Schedu.Data.csproj">
       <Project>{4bd8294e-9df8-4e54-a6da-93f7cd609f45}</Project>
@@ -98,6 +100,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Product\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

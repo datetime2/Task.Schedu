@@ -7,11 +7,11 @@ using Task.Schedu.Utility;
 namespace Task.Schedu.Data
 {
     /// <summary> 
-    /// SqlServer数据访问接口实现
+    /// 数据访问接口实现
     /// </summary> 
     public class SQLHelper
     {
-        private static string strConnect =SysConfig.SqlConnect;
+        private static string strConnect =SysConfig.ScheduConnect;
 
         /// <summary>
         /// 执行命令,并返回影响函数
