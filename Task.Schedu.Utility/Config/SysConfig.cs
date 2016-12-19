@@ -34,5 +34,10 @@
         /// </summary>
         [PathMap(Key = "SettingConnect")]
         public static string SettingConnect { get; set; }
+        /// <summary>
+        /// 主业务数据库链接字符串
+        /// </summary>
+        [PathMap(Key = "MainConnect")]
+        public static string MainConnect { get; set; }
     }
 }

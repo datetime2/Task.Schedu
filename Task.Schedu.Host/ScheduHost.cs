@@ -27,7 +27,7 @@ namespace Task.Schedu.Host
                 Thread.Sleep(10000);
             }
             //配置信息读取
-            ConfigInit.InitConfig();
+            ConfigInit.Init();
             //3.系统参数配置初始化
             MefConfig.Init();
             ConfigManager configManager = MefConfig.TryResolve<ConfigManager>();

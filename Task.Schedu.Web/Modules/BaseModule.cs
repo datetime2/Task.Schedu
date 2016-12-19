@@ -16,7 +16,7 @@ namespace Task.Schedu.Web.Modules
         }
         private void Init()
         {
-            this.RequiresAuthentication();
+            //this.RequiresAuthentication();
             Before += ctx =>
             {
                 ViewBag.Version = SystemConfig.StaticVersion;

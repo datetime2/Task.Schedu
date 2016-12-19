@@ -10,7 +10,7 @@ namespace Task.Schedu.Web.Modules
                 var model = new
                 {
                     Title = SystemConfig.SystemTitle,
-                    CurrentUser = Context.CurrentUser.UserName
+                    CurrentUser = "Admin"//Context.CurrentUser.UserName
                 };
                 return View["Index", model];
             };

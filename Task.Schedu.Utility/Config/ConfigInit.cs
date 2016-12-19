@@ -29,7 +29,7 @@ namespace Task.Schedu.Utility
         /// <summary>
         /// 初始化配置信息
         /// </summary>
-        public static void InitConfig()
+        public static void Init()
         {
             try
             {
