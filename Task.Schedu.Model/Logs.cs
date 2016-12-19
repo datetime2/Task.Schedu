@@ -11,7 +11,7 @@ namespace Task.Schedu.Model
     /// </summary>
     public class Logs
     {
-        public long LogId { get; set; }
+        public string LogId { get; set; }
         public LogType LogType { get; set; }
         public string LogMsg { get; set; }
         public DateTime CreatedOn { get; set; }

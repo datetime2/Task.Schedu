@@ -10,6 +10,9 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Reflection;
+    using System.Threading.Tasks;
+    using Utility;
+
     /// <summary>
     /// 数据库类型
     /// </summary>
@@ -79,9 +82,17 @@
         /// <returns></returns>
         protected bool CommitExt(Func<IDatabase, bool> func, string dbConnect, DbType dbType = DbType.MySql)
         {
-            using (var client = DbFactory.CreateDb(dbType, dbConnect))
+            try
             {
-                return func(client);
+                using (var client = DbFactory.CreateDb(dbType, dbConnect))
+                {
+                    return func(client);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("CommitExt出错了:", ex);
+                return false;
             }
         }
         #endregion
@@ -138,9 +149,33 @@
         /// <returns></returns>
         protected bool Commit(Func<IDbConnection, bool> func, string dbConnect, DbType dbType = DbType.MySql)
         {
-            using (var client = DbFactory.MakeDb(dbType, dbConnect))
+            try
             {
-                return func(client);
+                using (var client = DbFactory.MakeDb(dbType, dbConnect))
+                {
+                    return func(client);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("Commit出错了:",ex);
+                return false;
+            }
+        }
+
+        protected async Task<int> CommitAsync(Func<IDbConnection, Task<int>> func, string dbConnect, DbType dbType = DbType.MySql)
+        {
+            try
+            {
+                using (var client = DbFactory.MakeDb(dbType, dbConnect))
+                {
+                    return await func(client);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteLog("Commit出错了:", ex);
+                return 0;
             }
         }
         #endregion

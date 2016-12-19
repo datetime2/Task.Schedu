@@ -47,5 +47,17 @@ namespace Task.Schedu.Testing.Utils
         /// </summary>
         public static LogHelper OrderNoPayCloseLogError = new LogHelper("OrderNoPayCloseJob", "error");
 
+
+
+        /// <summary>
+        /// 订单确认
+        /// </summary>
+        public static LogHelper OrderConfirmLogInfo = new LogHelper("OrderConfirm", "info");
+
+        /// <summary>
+        /// 订单确认异常
+        /// </summary>
+        public static LogHelper OrderConfirmLogError = new LogHelper("OrderConfirm", "error");
+
     }
 }

@@ -39,5 +39,10 @@
         /// </summary>
         [PathMap(Key = "MainConnect")]
         public static string MainConnect { get; set; }
+        /// <summary>
+        /// 缓存服务器(Redis、Memcached)
+        /// </summary>
+        [PathMap(Key = "CacheServer")]
+        public static string CacheServer { get; set; }
     }
 }
