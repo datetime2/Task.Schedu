@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Task.Schedu.Access;
 using Task.Schedu.Model;
-using Task.Schedu.User;
 using Task.Schedu.Utility;
 
 namespace Task.Schedu.Web.Modules
@@ -19,14 +19,14 @@ namespace Task.Schedu.Web.Modules
             Post["/PostQuery"] = r =>
             {
                 QueryCondition condition = this.Bind<QueryCondition>();
-                return Response.AsJson(UserHelper.Query(condition));
+                return Response.AsJson(UserAccess.Query(condition));
             };
             Put["/{Id}/{Status:int}"] = r =>
             {
                 JsonBaseModel<string> result = new JsonBaseModel<string>();
                 try
                 {
-                    UserHelper.UpdUserStatus(r.Id, r.Status);
+                    UserAccess.UpdUserStatus(r.Id, r.Status);
                 }
                 catch (Exception ex)
                 {
@@ -41,7 +41,7 @@ namespace Task.Schedu.Web.Modules
                 try
                 {
                     string TaskId = r.Id;
-                    UserHelper.DeleteById(TaskId);
+                    UserAccess.DeleteById(TaskId);
                 }
                 catch (Exception ex)
                 {
@@ -53,12 +53,12 @@ namespace Task.Schedu.Web.Modules
             Post["/"] = r =>
             {
                 var user = this.Bind<Users>();
-                return Response.AsJson(UserHelper.SaveUser(user));
+                return Response.AsJson(UserAccess.SaveUser(user));
             };
             Put["/"] = r =>
             {
                 var user = this.Bind<Users>();
-                return Response.AsJson(UserHelper.SaveUser(user));
+                return Response.AsJson(UserAccess.SaveUser(user));
             };
             Get["/GetById/{Id}"] = r =>
             {
@@ -67,7 +67,7 @@ namespace Task.Schedu.Web.Modules
                 {
                     //取出单条记录数据
                     string TaskId = r.Id;
-                    result.Result = UserHelper.GetById(TaskId);
+                    result.Result = UserAccess.GetById(TaskId);
                 }
                 catch (Exception ex)
                 {

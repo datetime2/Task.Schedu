@@ -25,7 +25,13 @@ namespace Task.Schedu.Jobs
         public void Execute(IJobExecutionContext context)
         {
             var logs = new List<Logs>();
-            TaskLog.OrderNoPayCloseLogInfo.WriteLogE("逾期未付款订单关闭开始");
+            logs.Add(new Logs
+            {
+                LogId = Guid.NewGuid().ToString(),
+                CreatedOn = DateTime.Now,
+                LogType = LogType.DEBUG,
+                LogMsg = "逾期未付款订单关闭开始......"
+            });
             //待处理订单
             var NoPayOrders = FindBy((client) =>
             {
@@ -57,7 +63,7 @@ namespace Task.Schedu.Jobs
                         try
                         {
                             //修改订单状态
-                            var flag = client.Execute("UPDATE Orders SET OrderStatusss=5,FinishDate=@FinishDate,CloseReason=@CloseReason WHERE Id=@OrderId",
+                            var flag = client.Execute("UPDATE Orders SET OrderStatus=5,FinishDate=@FinishDate,CloseReason=@CloseReason WHERE Id=@OrderId",
                                   new
                                   {
                                       OrderId = item.Id,
@@ -74,8 +80,14 @@ namespace Task.Schedu.Jobs
                                 }
                                 //返还优惠券
                                 //var couponRecord = client.Query("SELECT CounponStatus,UserId,UsedTime,OrderId,CouponPackageId FROM CouponRecord WHERE ")
-
                                 //返还钱包金额
+                                logs.Add(new Logs
+                                {
+                                    LogId = Guid.NewGuid().ToString(),
+                                    CreatedOn = DateTime.Now,
+                                    LogType = LogType.INFO,
+                                    LogMsg = string.Format("订单{0}处理成功", item.Id)
+                                });
                             }
                         }
                         catch (Exception ex)
@@ -92,24 +104,27 @@ namespace Task.Schedu.Jobs
                     }
                     return true;
                 }, SysConfig.MainConnect);
-
-                //订单操作异常日志
-                if (logs.Any())
-                {
-                    TaskLog.OrderNoPayCloseLogError.WriteLogE("处理异常");
-
-                    System.Threading.Tasks.Task.Factory.StartNew(() =>
-                    {
-                        Commit((client) =>
-                        {
-                            client.Execute(@"INSERT INTO t_OrderLog(LogId,LogType,LogMsg,CreatedOn) 
-                                                 VALUES(@LogId,@LogType,@LogMsg,@CreatedOn)", logs);
-                            return true;
-                        }, SysConfig.ScheduConnect);
-                    });
-                }
             }
-            TaskLog.OrderNoPayCloseLogInfo.WriteLogE("逾期未付款订单关闭结束");
+            logs.Add(new Logs
+            {
+                LogId = Guid.NewGuid().ToString(),
+                CreatedOn = DateTime.Now,
+                LogType = LogType.DEBUG,
+                LogMsg = "逾期未付款订单关闭结束......"
+            });
+            //订单操作异常日志
+            if (logs.Any())
+            {
+                System.Threading.Tasks.Task.Factory.StartNew(() =>
+                {
+                    Commit((client) =>
+                    {
+                        client.Execute(@"INSERT INTO t_OrderLog(LogId,LogType,LogMsg,CreatedOn) 
+                                                 VALUES(@LogId,@LogType,@LogMsg,@CreatedOn)", logs);
+                        return true;
+                    }, SysConfig.ScheduConnect);
+                });
+            }
         }
     }
 }

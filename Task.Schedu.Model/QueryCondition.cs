@@ -9,6 +9,11 @@ namespace Task.Schedu.Model
     /// </summary>
     public class QueryCondition
     {
+        /// <summary>
+        /// 表名
+        /// </summary>
+        public string TableName { get; set; }
+
         private int pageSize;
 
         /// <summary>

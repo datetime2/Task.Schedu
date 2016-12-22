@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.Model", "Task.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.Excel", "Task.Schedu.Handle\Task.Schedu.Excel\Task.Schedu.Excel.csproj", "{9971FC17-99C2-4691-B5E2-8EEA0BAADEB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.User", "Task.Schedu.Handle\Task.Schedu.User\Task.Schedu.User.csproj", "{284FE2B0-A178-4AC7-94AC-CD770E441BE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Schedu.Access", "Task.Schedu.Handle\Task.Schedu.User\Task.Schedu.Access.csproj", "{284FE2B0-A178-4AC7-94AC-CD770E441BE4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task.Schedu.Handle.Job", "Task.Schedu.Handle.Job", "{FBB52525-E7F2-4FAB-9428-D2D004673385}"
 EndProject

@@ -1,12 +1,12 @@
 ﻿using Nancy;
 using Nancy.ModelBinding;
 using Task.Schedu.Model;
-using Task.Schedu.User;
 using Task.Schedu.Utility;
 using System;
 using Nancy.Authentication.Forms;
 using Nancy.Security;
 using Task.Schedu.Web.Model;
+using Task.Schedu.Access;
 
 namespace Task.Schedu.Web.Modules
 {
@@ -26,7 +26,7 @@ namespace Task.Schedu.Web.Modules
             Post["/Login/Info"] = x =>
             {
                 var info = this.Bind<Users>();
-                JsonBaseModel<Users> user = UserHelper.Login(info.UserName, info.PassWord, Request.UserHostAddress);
+                JsonBaseModel<Users> user = UserAccess.Login(info.UserName, info.PassWord, Request.UserHostAddress);
                 if (!user.HasError && user.Result != null)
                     return this.LoginAndRedirect(Guid.Parse(user.Result.UserId), cookieExpiry: DateTime.Now.AddDays(2), fallbackRedirectUrl: "/Home");
                 else
@@ -39,7 +39,7 @@ namespace Task.Schedu.Web.Modules
     {
         public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
         {
-            var user = UserHelper.GetById(identifier.ToString());
+            var user = UserAccess.GetById(identifier.ToString());
             if (user == null) return null;
             else
                 return new UserIdentity
