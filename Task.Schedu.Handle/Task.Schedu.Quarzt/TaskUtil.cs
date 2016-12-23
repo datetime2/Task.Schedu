@@ -103,8 +103,8 @@ namespace Task.Schedu.Quarzt
     /// </summary>
     public class TaskHelper
     {
-        private static string InsertSQL = @"INSERT INTO t_Tasks(TaskID,TaskName,CronExpressionString,Assembly,Class,Status,CronRemark,Remark,LastRunTime)
-                            VALUES(@TaskID,@TaskName,@CronExpressionString,@Assembly,@Class,@Status,@CronRemark,@Remark,@LastRunTime)";
+        private static string InsertSQL = @"INSERT INTO t_Tasks(TaskID,TaskName,CronExpressionString,Assembly,Class,Status,CronRemark,Remark,LastRunTime,CreatedOn)
+                            VALUES(@TaskID,@TaskName,@CronExpressionString,@Assembly,@Class,@Status,@CronRemark,@Remark,@LastRunTime,@CreatedOn)";
 
         private static string UpdateSQL = @"UPDATE t_Tasks SET TaskName=@TaskName,CronExpressionString=@CronExpressionString,Assembly=@Assembly,
                                 Class=@Class,CronRemark=@CronRemark,Remark=@Remark,LastRunTime=@LastRunTime WHERE TaskID=@TaskID";
