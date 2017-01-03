@@ -11,6 +11,7 @@ namespace Task.Schedu.Jobs
     /// <summary>
     /// 未收货订单 自动收货
     /// </summary>
+    [DisallowConcurrentExecution]
     public class ConfirmOrderWithNoRecive : DbAccess<dynamic>, IJob
     {
         public void Execute(IJobExecutionContext context)

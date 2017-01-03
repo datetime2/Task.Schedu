@@ -32,10 +32,8 @@ namespace Task.Schedu.Host
             MefConfig.Init();
             ConfigManager configManager = MefConfig.TryResolve<ConfigManager>();
             configManager.Init();
-
             QuartzHelper.InitScheduler();
             QuartzHelper.StartScheduler();
-
             // 保持web服务运行  
             ThreadPool.QueueUserWorkItem((o) =>
             {
