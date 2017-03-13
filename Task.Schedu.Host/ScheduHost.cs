@@ -17,15 +17,12 @@ namespace Task.Schedu.Host
         {
             InitializeComponent();
         }
-
         protected override void OnStart(string[] args)
         {
             DebuggableAttribute att = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttribute<DebuggableAttribute>();
             if (att.IsJITTrackingEnabled)
-            {
                 //Debug模式才让线程停止10s,方便附加到进程调试
                 Thread.Sleep(10000);
-            }
             //配置信息读取
             ConfigInit.Init();
             //3.系统参数配置初始化
@@ -38,7 +35,7 @@ namespace Task.Schedu.Host
             ThreadPool.QueueUserWorkItem((o) =>
             {
                 //启动站点
-                Startup.Start(SystemConfig.WebHost,SystemConfig.WebPort);
+                Startup.Start(SystemConfig.WebHost, SystemConfig.WebPort);
             });
         }
 
