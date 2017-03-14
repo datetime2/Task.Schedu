@@ -79,6 +79,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloseOrderWithNoPay.cs" />
+    <Compile Include="ConfirmOrderWithNoRecive.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Jobs\OrderNoPayCloseJob.cs" />
     <Compile Include="Jobs\TestJob.cs" />
